@@ -486,25 +486,31 @@
       }
 
       function saveRanking(name, userScore) {
-        let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
+    let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
+    
+    // Procura se o jogador já existe na lista (ignorando maiúsculas/minúsculas)
+    const existingPlayerIndex = ranking.findIndex(
+        player => player.name.trim().toLowerCase() === name.trim().toLowerCase()
+    );
+
+    if (existingPlayerIndex !== -1) {
+        // Se o jogador já existe, atualiza apenas se a nova pontuação for maior
+        if (userScore > ranking[existingPlayerIndex].score) {
+            ranking[existingPlayerIndex].score = userScore;
+        }
+    } else {
+        // Se é um jogador novo, adiciona à lista
         ranking.push({ name: name, score: userScore });
-        ranking.sort((a, b) => b.score - a.score);
-        ranking = ranking.slice(0, 5);
-        localStorage.setItem("quizRanking", JSON.stringify(ranking));
-      }
+    }
 
-      function displayRanking() {
-        const rankingList = document.getElementById("ranking-list");
-        rankingList.innerHTML = "";
-        let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
-
-        ranking.forEach((player, index) => {
-          const li = document.createElement("li");
-          li.classList.add("ranking-item");
-          li.innerHTML = `<span>#${index + 1} ${player.name}</span> <span>${player.score} / ${questions.length} pts</span>`;
-          rankingList.appendChild(li);
-        });
-      }
+    // Ordena do maior para o menor resultado
+    ranking.sort((a, b) => b.score - a.score);
+    
+    // Mantém apenas os 5 melhores no ranking geral
+    ranking = ranking.slice(0, 5);
+    
+    localStorage.setItem("quizRanking", JSON.stringify(ranking));
+}
 
       function restartQuiz() {
         currentQuestionIndex = 0;
