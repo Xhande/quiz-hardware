@@ -258,13 +258,14 @@
         }
     }
 
-    function showResults() {
+   function showResults() {
         document.getElementById("quiz-screen").style.display = "none";
         document.getElementById("results-screen").style.display = "block";
         
         const percentage = Math.round((score / questions.length) * 100);
         document.getElementById("score-text").innerText = `${userName}, você acertou ${score} de ${questions.length} questões (${percentage}% de aproveitamento).`;
 
+        // Passa a porcentagem calculada para a função
         saveRanking(userName, score, percentage);
         displayRanking();
     }
@@ -272,26 +273,24 @@
     function saveRanking(name, userScore, percentage) {
         let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
         
-        // Verifica se a pessoa já está no ranking (sem diferenciar maiúsculas/minúsculas)
+        // Verifica se a pessoa já está no ranking
         const existingPlayerIndex = ranking.findIndex(
             player => player.name.trim().toLowerCase() === name.trim().toLowerCase()
         );
 
         if (existingPlayerIndex !== -1) {
-            // Atualiza apenas se a pontuação atual for maior que a cadastrada
+            // Atualiza se a nova pontuação for maior
             if (userScore > ranking[existingPlayerIndex].score) {
                 ranking[existingPlayerIndex].score = userScore;
                 ranking[existingPlayerIndex].percentage = percentage;
             }
         } else {
-            // Se for um participante novo, inclui na lista
+            // Adiciona novo jogador com a porcentagem
             ranking.push({ name: name, score: userScore, percentage: percentage });
         }
 
-        // Ordena do maior para o menor resultado
+        // Ordena e mantém o Top 10
         ranking.sort((a, b) => b.score - a.score);
-        
-        // Limita a exibição aos 10 melhores
         ranking = ranking.slice(0, 10);
         
         localStorage.setItem("quizRanking", JSON.stringify(ranking));
@@ -310,9 +309,12 @@
         ranking.forEach((player, index) => {
             const li = document.createElement("li");
             li.classList.add("ranking-item");
+            // Garante que se o registro antigo não tiver porcentagem, ele calcula na hora
+            const playerPercent = player.percentage !== undefined ? player.percentage : Math.round((player.score / questions.length) * 100);
+            
             li.innerHTML = `
                 <span>#${index + 1} ${player.name}</span> 
-                <span>${player.score}/${questions.length} acertos (${player.percentage}%)</span>
+                <span>${player.score}/${questions.length} acertos (${playerPercent}%)</span>
             `;
             rankingList.appendChild(li);
         });
