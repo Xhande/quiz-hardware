@@ -146,7 +146,7 @@
         <h2>Quiz Concluído!</h2>
         <p class="score" id="score-text"></p>
 
-        <div class="ranking-title">🏆 Top 5 Melhores Pontuações</div>
+        <div class="ranking-title">🏆 Top 10 Melhores Pontuações</div>
         <ul id="ranking-list" class="ranking-list"></ul>
 
         <button class="restart-btn" onclick="restartQuiz()">Novo Jogador / Tentar Novamente</button>
@@ -291,8 +291,8 @@
         // Ordena do maior para o menor resultado
         ranking.sort((a, b) => b.score - a.score);
         
-        // Limita a exibição aos 5 melhores
-        ranking = ranking.slice(0, 5);
+        // Limita a exibição aos 10 melhores
+        ranking = ranking.slice(0, 10);
         
         localStorage.setItem("quizRanking", JSON.stringify(ranking));
     }
