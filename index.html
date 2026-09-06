@@ -1,174 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado de Hardware - Concursos</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { 
+            background-image: url("plano de fundo.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+        }
+
+        .quiz-container { 
+            background: rgba(255, 255, 255, 0.98); 
+            backdrop-filter: blur(8px);
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            width: 100%; 
+            max-width: 680px; 
+            overflow: hidden;
+        }
+
+        .screen-padding { padding: 30px; }
+        
+        /* BANNER RESUMAÇO */
+        .summary-card {
+            background-color: #f3e8ff;
+            border-left: 5px solid #7e22ce;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #4c1d95;
+            line-height: 1.5;
+        }
+
+        .summary-card strong { color: #581c87; }
+
+        /* BOTOES DE MODO */
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid #7e22ce;
+            background-color: transparent;
+            color: #7e22ce;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background-color: #7e22ce;
+            color: white;
+        }
+
+        /* BANNER DE AVISO DE TEMPO DO MODO PROVA */
+        .timer-info-banner {
+            background-color: #fff7ed;
+            border: 1px solid #ffedd5;
+            border-left: 4px solid #f97316;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #9a3412;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        /* BARRA DE PROGRESSO */
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: #7e22ce;
+            transition: width 0.3s ease;
+        }
+
+        .timer-display {
+            font-size: 14px;
+            font-weight: bold;
+            color: #c2410c;
+            float: right;
+        }
+
+        /* ENUNCIADO E OPÇÕES */
+        .question-text { font-size: 17px; font-weight: 600; color: #0f172a; margin-bottom: 18px; line-height: 1.4; }
+        .options-container { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { background-color: #f8fafc; border: 2px solid #cbd5e1; padding: 12px 15px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s ease; }
+        .option-btn:hover:not([disabled]) { background-color: #f1f5f9; border-color: #94a3b8; }
+        .option-btn.selected { border-color: #7e22ce; background-color: #f3e8ff; font-weight: 600; }
+        .option-btn.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d; font-weight: bold; }
+        .option-btn.wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c; }
+        
+        .explanation { margin-top: 15px; padding: 12px; border-radius: 8px; background-color: #f1f5f9; font-size: 13px; line-height: 1.4; color: #334155; display: none; }
+
+        /* NAVEGAÇÃO */
+        .nav-buttons { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; }
+        .nav-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background-color: #cbd5e1; color: #475569; }
+        .nav-btn.primary { background-color: #7e22ce; color: white; }
+        .nav-btn.primary:hover { background-color: #6b21a8; }
+
+        /* FORMULARIO E RESULTADOS */
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .input-group input { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; }
+        .ranking-list { list-style: none; padding: 0; margin: 15px 0; }
+        .ranking-item { display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 6px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+
+    <!-- TELA 1: CADASTRO -->
+    <div id="welcome-screen" class="screen-padding" style="text-align: center;">
+        <h2 style="margin-bottom: 10px; color: #0f172a;">Simulado de Informática: Hardware</h2>
+        <p style="color: #64748b; margin-bottom: 20px; font-size: 14px;">Identifique-se para iniciar a resolução e salvar seu desempenho no ranking geral.</p>
+        
+        <div class="input-group">
+            <label for="username">Nome Completo do Candidato:</label>
+            <input type="text" id="username" placeholder="Digite seu nome...">
+        </div>
+
+        <button class="nav-btn primary" style="width: 100%; padding: 14px; font-size: 16px;" onclick="startQuiz()">Entrar no Simulado</button>
+    </div>
+
+    <!-- TELA 2: ÁREA DE QUESTÕES -->
+    <div id="quiz-screen" class="screen-padding" style="display: none;">
+        
+        <!-- RESUMAÇO PEDAGÓGICO DE HARDWARE -->
+        <div class="summary-card">
+            <p><strong>CPU (Processador):</strong> Cérebro do sistema, executa cálculos e instruções.<br>
+            <strong>Memória RAM:</strong> Armazenamento primário, volátil (perde dados ao desligar).<br>
+            <strong>SSD/HD:</strong> Armazenamento secundário, não-volátil (dados permanentes).</p>
+        </div>
+
+        <!-- SELETOR DE MODO DE RESOLUÇÃO -->
+        <div class="mode-selector">
+            <button class="mode-btn active" id="btn-treino" onclick="setMode('treino')">Modo Treino (Feedback Imediato)</button>
+            <button class="mode-btn" id="btn-prova" onclick="setMode('prova')">Modo Prova (Gabarito no Final)</button>
+        </div>
+
+        <!-- MENSAGEM COM FONTE SEGUIRA SOBRE TEMPO (EXIBIDA APENAS NO MODO PROVA) -->
+        <div id="timer-info" class="timer-info-banner">
+            ⏱️ <strong>Orientação de Concurso:</strong> Segundo especialistas de bancas examinadoras, o tempo médio por questão é de <strong>3 minutos</strong> (incluindo cartão-resposta). O tempo ideal para um excelente desempenho é de até <strong>1min 30s</strong> por questão objetiva de informática.
+        </div>
+
+        <div class="progress-bar-bg"><div id="progress-bar" class="progress-bar-fill"></div></div>
+        
+        <div style="margin-bottom: 10px; overflow: hidden;">
+            <span id="progress-text" style="font-size: 13px; font-weight: bold; color: #64748b;">Questão 1 de 5</span>
+            <span id="timer-display" class="timer-display"></span>
+        </div>
+
+        <div class="question-text" id="question-text"></div>
+        <div class="options-container" id="options-container"></div>
+        <div class="explanation" id="explanation"></div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prev-btn" onclick="prevQuestion()" disabled>Anterior</button>
+            <button class="nav-btn primary" id="next-btn" onclick="nextQuestion()">Próxima</button>
+        </div>
+    </div>
+
+    <!-- TELA 3: RESULTADO E RANKING -->
+    <div id="results-screen" class="screen-padding" style="display: none; text-align: center;">
+        <h2>Resultado Final do Simulado</h2>
+        <p id="score-text" style="margin: 15px 0; font-weight: bold; color: #475569;"></p>
+        <p id="time-spent-text" style="font-size: 13px; color: #64748b; margin-bottom: 20px;"></p>
+
+        <h3 style="text-align: left; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">🏆 Top 10 Melhores Colocados</h3>
+        <ul id="ranking-list" class="ranking-list"></ul>
+
+        <button class="nav-btn primary" style="width: 100%; margin-top: 15px;" onclick="restartQuiz()">Refazer Simulado</button>
+    </div>
+
+</div>
+
 <script>
     const questions = [
-        {
-            question: "Qual componente é considerado o 'cérebro' do computador, responsável por processar dados e executar instruções?",
-            options: ["Placa de Vídeo (GPU)", "Memória RAM", "Processador (CPU)", "Disco Rígido (HD)"],
-            answer: 2,
-            explanation: "A CPU (Unidade Central de Processamento) gerencia e executa as instruções do sistema e dos programas."
-        },
-        {
-            question: "Qual tipo de memória é volátil, ou seja, perde todos os dados quando o computador é desligado?",
-            options: ["Memória RAM", "SSD", "ROM", "HD Externo"],
-            answer: 0,
-            explanation: "A memória RAM armazena temporariamente os dados que o computador precisa no momento, sendo esvaziada ao desligar o sistema."
-        },
-        {
-            question: "Qual dispositivo de armazenamento abaixo oferece maior velocidade de leitura e escrita de dados?",
-            options: ["HD SATA III", "Pendrive USB 2.0", "SSD NVMe M.2", "Disco Óptico (DVD)"],
-            answer: 2,
-            explanation: "Os SSDs NVMe M.2 utilizam o barramento PCIe, oferecendo velocidades muito superiores aos HDs e SSDs SATA tradicionais."
-        },
-        {
-            question: "Qual componente é responsável por fornecer energia elétrica regulada a todas as peças do computador?",
-            options: ["Placa-mãe", "Fonte de Alimentação", "Estabilizador", "Cooler"],
-            answer: 1,
-            explanation: "A fonte de alimentação converte a corrente alternada da tomada em corrente contínua necessária para os componentes internos."
-        },
-        {
-            question: "Qual porta de conexão é amplamente utilizada para transmitir vídeo e áudio de alta definição digital simultaneamente?",
-            options: ["VGA", "DVI", "HDMI", "PS/2"],
-            answer: 2,
-            explanation: "O HDMI suporta a transmissão integrada de áudio e vídeo em alta definição em um único cabo."
-        }
+        { question: "Qual componente é responsável por processar dados e executar as instruções do sistema?", options: ["GPU", "Memória RAM", "Processador (CPU)", "HD"], answer: 2, explanation: "A CPU é a Unidade Central de Processamento, responsável pela execução de instruções." },
+        { question: "A memória RAM é classificada como:", options: ["Volátil e Primária", "Não-volátil e Secundária", "Apenas Leitura (ROM)", "Armazenamento Externo"], answer: 0, explanation: "A RAM é volátil (perde dados ao desligar) e de acesso rápido (primária)." },
+        { question: "Qual dispositivo utiliza barramento PCIe para atingir altíssimas velocidades?", options: ["HD SATA", "SSD NVMe M.2", "CD-ROM", "Fita Dat"], answer: 1, explanation: "Os SSDs NVMe M.2 usam as linhas PCIe para entregar transferências muito superiores ao protocolo SATA." },
+        { question: "Responsável por regular e fornecer a corrente elétrica adequada ao computador:", options: ["Placa-mãe", "Fonte de Alimentação", "Cooler", "Estabilizador"], answer: 1, explanation: "A fonte converte a corrente alternada da rede em corrente contínua para os componentes." },
+        { question: "Qual interface transmite simultaneamente áudio e vídeo em sinal puramente digital?", options: ["VGA", "DVI-A", "HDMI", "P2"], answer: 2, explanation: "O HDMI unifica a transmissão de vídeo e áudio digitais em um único cabo." }
     ];
 
-    let currentQuestionIndex = 0;
-    let score = 0;
+    let currentQuestion = 0;
+    let selectedAnswers = new Array(questions.length).fill(null);
+    let currentMode = "treino"; // "treino" ou "prova"
     let userName = "";
-
-    function goToRegister() {
-        document.getElementById("cover-screen").style.display = "none";
-        document.getElementById("welcome-screen").style.display = "block";
-    }
+    let timerInterval = null;
+    let totalSeconds = 0;
 
     function startQuiz() {
         const inputName = document.getElementById("username").value.trim();
-        if (inputName === "") {
-            alert("Por favor, informe seu nome para continuar!");
-            return;
-        }
+        if(!inputName) { alert("Informe seu nome!"); return; }
         userName = inputName;
         document.getElementById("welcome-screen").style.display = "none";
         document.getElementById("quiz-screen").style.display = "block";
         loadQuestion();
     }
 
-    function loadQuestion() {
-        const q = questions[currentQuestionIndex];
-        document.getElementById("progress").innerText = `Questão ${currentQuestionIndex + 1} de ${questions.length}`;
-        document.getElementById("question-text").innerText = q.question;
-        const optionsContainer = document.getElementById("options-container");
-        optionsContainer.innerHTML = "";
-        document.getElementById("explanation").style.display = "none";
-        document.getElementById("next-btn").style.display = "none";
+    function setMode(mode) {
+        currentMode = mode;
+        document.getElementById("btn-treino").className = mode === "treino" ? "mode-btn active" : "mode-btn";
+        document.getElementById("btn-prova").className = mode === "prova" ? "mode-btn active" : "mode-btn";
+        document.getElementById("timer-info").style.display = mode === "prova" ? "block" : "none";
 
-        q.options.forEach((option, index) => {
-            const button = document.createElement("button");
-            button.innerText = option;
-            button.classList.add("option-btn");
-            button.onclick = () => selectOption(index);
-            optionsContainer.appendChild(button);
-        });
+        if(mode === "prova" && !timerInterval) {
+            startTimer();
+        } else if(mode === "treino") {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            document.getElementById("timer-display").innerText = "";
+        }
+        loadQuestion();
     }
 
-    function selectOption(selectedIndex) {
-        const q = questions[currentQuestionIndex];
-        const buttons = document.getElementById("options-container").children;
+    function startTimer() {
+        totalSeconds = 0;
+        timerInterval = setInterval(() => {
+            totalSeconds++;
+            const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+            const secs = String(totalSeconds % 60).padStart(2, '0');
+            document.getElementById("timer-display").innerText = `⏱️ ${mins}:${secs}`;
+        }, 1000);
+    }
 
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].disabled = true;
-            if (i === q.answer) {
-                buttons[i].classList.add("correct");
-            } else if (i === selectedIndex) {
-                buttons[i].classList.add("wrong");
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById("progress-text").innerText = `Questão ${currentQuestion + 1} de ${questions.length}`;
+        document.getElementById("progress-bar").style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+        document.getElementById("question-text").innerText = q.question;
+        
+        const container = document.getElementById("options-container");
+        container.innerHTML = "";
+        const exp = document.getElementById("explanation");
+        exp.style.display = "none";
+
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            
+            if(selectedAnswers[currentQuestion] === idx) {
+                btn.classList.add("selected");
             }
+
+            if(currentMode === "treino" && selectedAnswers[currentQuestion] !== null) {
+                btn.disabled = true;
+                if(idx === q.answer) btn.classList.add("correct");
+                else if(selectedAnswers[currentQuestion] === idx) btn.classList.add("wrong");
+            }
+
+            btn.onclick = () => selectOption(idx);
+            container.appendChild(btn);
+        });
+
+        if(currentMode === "treino" && selectedAnswers[currentQuestion] !== null) {
+            exp.innerText = "Gabarito Comentado: " + q.explanation;
+            exp.style.display = "block";
         }
 
-        if (selectedIndex === q.answer) {
-            score++;
-        }
+        document.getElementById("prev-btn").disabled = currentQuestion === 0;
+        document.getElementById("next-btn").innerText = currentQuestion === questions.length - 1 ? "Finalizar" : "Próxima";
+    }
 
-        const explanation = document.getElementById("explanation");
-        explanation.innerText = "Explicação: " + q.explanation;
-        explanation.style.display = "block";
-        document.getElementById("next-btn").style.display = "block";
+    function selectOption(idx) {
+        selectedAnswers[currentQuestion] = idx;
+        loadQuestion();
+    }
+
+    function prevQuestion() {
+        if(currentQuestion > 0) { currentQuestion--; loadQuestion(); }
     }
 
     function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
+        if(currentQuestion < questions.length - 1) {
+            currentQuestion++;
             loadQuestion();
         } else {
-            showResults();
+            finishQuiz();
         }
     }
 
-    function showResults() {
+    function finishQuiz() {
+        if(timerInterval) clearInterval(timerInterval);
         document.getElementById("quiz-screen").style.display = "none";
         document.getElementById("results-screen").style.display = "block";
-        
+
+        let score = 0;
+        selectedAnswers.forEach((ans, i) => { if(ans === questions[i].answer) score++; });
         const percentage = Math.round((score / questions.length) * 100);
-        document.getElementById("score-text").innerText = `${userName}, você acertou ${score} de ${questions.length} questões (${percentage}% de aproveitamento).`;
+
+        document.getElementById("score-text").innerText = `${userName}, você acertou ${score} de ${questions.length} (${percentage}%).`;
+        
+        if(currentMode === "prova") {
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            document.getElementById("time-spent-text").innerText = `Tempo total de resolução: ${mins}m ${secs}s (Média por questão: ${Math.round(totalSeconds / questions.length)}s).`;
+        }
 
         saveRanking(userName, score, percentage);
         displayRanking();
     }
 
-    function saveRanking(name, userScore, percentage) {
+    function saveRanking(name, score, percentage) {
         let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
-        
-        const existingPlayerIndex = ranking.findIndex(
-            player => player.name.trim().toLowerCase() === name.trim().toLowerCase()
-        );
+        const idx = ranking.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
 
-        if (existingPlayerIndex !== -1) {
-            if (userScore > ranking[existingPlayerIndex].score) {
-                ranking[existingPlayerIndex].score = userScore;
-                ranking[existingPlayerIndex].percentage = percentage;
+        if(idx !== -1) {
+            if(score > ranking[idx].score) {
+                ranking[idx].score = score;
+                ranking[idx].percentage = percentage;
             }
         } else {
-            ranking.push({ name: name, score: userScore, percentage: percentage });
+            ranking.push({ name, score, percentage });
         }
 
         ranking.sort((a, b) => b.score - a.score);
         ranking = ranking.slice(0, 10);
-        
         localStorage.setItem("quizRanking", JSON.stringify(ranking));
     }
 
     function displayRanking() {
-        const rankingList = document.getElementById("ranking-list");
-        rankingList.innerHTML = "";
+        const list = document.getElementById("ranking-list");
+        list.innerHTML = "";
         let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
 
-        if (ranking.length === 0) {
-            rankingList.innerHTML = "<li class='ranking-item'>Nenhum resultado registrado ainda.</li>";
-            return;
-        }
-
-        ranking.forEach((player, index) => {
+        ranking.forEach((player, i) => {
             const li = document.createElement("li");
-            li.classList.add("ranking-item");
-            
-            // Calcula a porcentagem se ela for undefined nos dados antigos
-            let playerPercent = player.percentage;
-            if (playerPercent === undefined || isNaN(playerPercent)) {
-                playerPercent = Math.round((player.score / questions.length) * 100);
-            }
-            
-            li.innerHTML = `
-                <span>#${index + 1} ${player.name}</span> 
-                <span>${player.score}/${questions.length} acertos (${playerPercent}%)</span>
-            `;
-            rankingList.appendChild(li);
+            li.className = "ranking-item";
+            li.innerHTML = `<span>#${i + 1} ${player.name}</span> <span>${player.score}/${questions.length} (${player.percentage}%)</span>`;
+            list.appendChild(li);
         });
     }
 
     function restartQuiz() {
-        currentQuestionIndex = 0;
-        score = 0;
-        document.getElementById("username").value = "";
+        currentQuestion = 0;
+        selectedAnswers.fill(null);
         document.getElementById("results-screen").style.display = "none";
-        document.getElementById("cover-screen").style.display = "block";
+        document.getElementById("welcome-screen").style.display = "block";
     }
 </script>
+</body>
+</html>
