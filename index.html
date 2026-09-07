@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guia Resumido de Hardware + Quiz</title>
+  <title>Guia Resumido de Hardware</title>
   <style>
     :root {
       --primary: #2563eb;
@@ -97,56 +97,6 @@
     .dica .box-title { color: var(--accent-tip); }
     .macete .box-title { color: var(--accent-trick); }
     .observacao .box-title { color: var(--accent-obs); }
-
-    /* Estilo do Quiz */
-    .quiz-question {
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px dashed #cbd5e1;
-    }
-
-    .quiz-options button {
-      display: block;
-      width: 100%;
-      text-align: left;
-      padding: 10px 14px;
-      margin: 6px 0;
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .quiz-options button:hover {
-      background: #e2e8f0;
-    }
-
-    .quiz-options button.correct {
-      background: #dcfce7 !important;
-      border-color: #22c55e !important;
-      color: #15803d;
-      font-weight: bold;
-    }
-
-    .quiz-options button.incorrect {
-      background: #fee2e2 !important;
-      border-color: #ef4444 !important;
-      color: #b91c1c;
-    }
-
-    .feedback {
-      font-weight: bold;
-      margin-top: 8px;
-      display: none;
-    }
-
-    #score {
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-align: center;
-      color: var(--primary);
-    }
   </style>
 </head>
 <body>
@@ -303,90 +253,7 @@
     </div>
   </div>
 
-  <!-- SEÇÃO DO QUIZ -->
-  <div class="section">
-    <h2>❓ Quiz de Fixação Rápido</h2>
-    <div id="quiz-container">
-      
-      <!-- Questão 1 -->
-      <div class="quiz-question" id="q1">
-        <p><strong>1. (Acesso à Memória)</strong> Qual tipo de memória perde todas as suas informações armazenadas no momento em que a alimentação elétrica do computador é interrompida?</p>
-        <div class="quiz-options">
-          <button onclick="checkAnswer('q1', this, false)">a) ROM</button>
-          <button onclick="checkAnswer('q1', this, false)">b) SSD</button>
-          <button onclick="checkAnswer('q1', this, true)">c) RAM</button>
-          <button onclick="checkAnswer('q1', this, false)">d) Flash</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <!-- Questão 2 -->
-      <div class="quiz-question" id="q2">
-        <p><strong>2. (Conceito de Periféricos)</strong> Uma impressora multifuncional que possui scanner e tela sensível ao toque para operações pode ser classificada como um dispositivo de:</p>
-        <div class="quiz-options">
-          <button onclick="checkAnswer('q2', this, false)">a) Apenas Entrada</button>
-          <button onclick="checkAnswer('q2', this, false)">b) Apenas Saída</button>
-          <button onclick="checkAnswer('q2', this, true)">c) Entrada e Saída (Híbrido)</button>
-          <button onclick="checkAnswer('q2', this, false)">d) Armazenamento Principal</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <!-- Questão 3 -->
-      <div class="quiz-question" id="q3">
-        <p><strong>3. (Barramentos de Dados)</strong> O protocolo NVMe foi desenvolvido para otimizar o desempenho de SSDs ao utilizar diretamente o barramento:</p>
-        <div class="quiz-options">
-          <button onclick="checkAnswer('q3', this, false)">a) USB 2.0</button>
-          <button onclick="checkAnswer('q3', this, false)">b) SATA</button>
-          <button onclick="checkAnswer('q3', this, true)">c) PCI Express</button>
-          <button onclick="checkAnswer('q3', this, false)">d) Barramento de Controle</button>
-        </div>
-        <div class="feedback"></div>
-      </div>
-
-      <div id="score"></div>
-    </div>
-  </div>
 </div>
-
-<script>
-  let correctCount = 0;
-  let answeredQuestions = new Set();
-
-  function checkAnswer(questionId, button, isCorrect) {
-    if (answeredQuestions.has(questionId)) return;
-    
-    answeredQuestions.add(questionId);
-    const questionDiv = document.getElementById(questionId);
-    const buttons = questionDiv.querySelectorAll('.quiz-options button');
-    const feedback = questionDiv.querySelector('.feedback');
-
-    buttons.forEach(btn => btn.disabled = true);
-
-    if (isCorrect) {
-      button.classList.add('correct');
-      feedback.textContent = 'Correto! 🎉';
-      feedback.style.color = '#15803d';
-      correctCount++;
-    } else {
-      button.classList.add('incorrect');
-      feedback.textContent = 'Incorreto!';
-      feedback.style.color = '#b91c1c';
-      
-      buttons.forEach(btn => {
-        if (btn.getAttribute('onclick').includes('true')) {
-          btn.classList.add('correct');
-        }
-      });
-    }
-
-    feedback.style.display = 'block';
-
-    if (answeredQuestions.size === 3) {
-      document.getElementById('score').textContent = `Você acertou ${correctCount} de 3 questões!`;
-    }
-  }
-</script>
 
 </body>
 </html>
