@@ -32,20 +32,30 @@
 
         .screen-padding { padding: 30px; }
 
-        /* CAPA INICIAL DO SITE (HERO COVER) */
+        /* TELA DE CAPA INICIAL DO SITE */
         .site-cover {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
 
-        .cover-icon {
-            font-size: 64px;
-            margin-bottom: 15px;
-            display: inline-block;
+        .cover-image-container {
+            width: 100%;
+            max-height: 280px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cover-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .cover-title {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             color: #0f172a;
             margin-bottom: 10px;
@@ -54,33 +64,11 @@
         .cover-subtitle {
             font-size: 15px;
             color: #64748b;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             line-height: 1.5;
         }
 
-        /* CAPA / CABEÇALHO DA ÁREA DE QUESTÕES */
-        .quiz-header-banner {
-            background: linear-gradient(135deg, #1e40af, #2563eb);
-            color: white;
-            padding: 24px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-        }
-
-        .quiz-header-banner h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .quiz-header-banner p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        /* BANNER RESUMAÇO */
+        /* BANNER RESUMAÇO PEDAGÓGICO */
         .summary-card {
             background-color: #eff6ff;
             border-left: 5px solid #2563eb;
@@ -159,7 +147,7 @@
             color: white;
         }
 
-        /* BANNER DE AVISO DE TEMPO DO MODO PROVA */
+        /* BANNER DE AVISO DE TEMPO DO MODO SIMULADO */
         .timer-info-banner {
             background-color: #fff7ed;
             border: 1px solid #ffedd5;
@@ -212,54 +200,29 @@
         .nav-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background-color: #cbd5e1; color: #475569; }
         .nav-btn.primary { background-color: #2563eb; color: white; }
         .nav-btn.primary:hover { background-color: #1d4ed8; }
-
-        /* FORMULARIO E RESULTADOS */
-        .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { display: block; font-weight: 600; margin-bottom: 8px; }
-        .input-group input { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; }
-        .ranking-list { list-style: none; padding: 0; margin: 15px 0; }
-        .ranking-item { display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 6px; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="quiz-container">
 
-    <!-- TELA 0: CAPA PRINCIPAL DO SITE (INICIAL) -->
+    <!-- TELA 1: CAPA PRINCIPAL DO SITE -->
     <div id="home-cover-screen" class="screen-padding site-cover">
-        <div class="cover-icon">💻</div>
+        <div class="cover-image-container">
+            <!-- Certifique-se de que a imagem na pasta do GitHub se chama 'capa.jpg' (ou altere a extensão abaixo se for .png) -->
+            <img src="capa.jpg" alt="Capa do Quiz de Hardware" onerror="this.onerror=null; this.src='capa.png';">
+        </div>
         <h1 class="cover-title">Quiz de Hardware</h1>
         <p class="cover-subtitle">
-            Prepare-se para concursos públicos com resumos teóricos completíssimos, macetes práticos e simulados interativos.
+            Testes e simulados práticos focados em concursos públicos. Acompanhe resumos de matérias, dicas e meça seu tempo de resolução.
         </p>
-        <button class="nav-btn primary" style="width: 100%; padding: 16px; font-size: 18px;" onclick="goToRegistration()">
+        <button class="nav-btn primary" style="width: 100%; padding: 16px; font-size: 18px;" onclick="startQuiz()">
             Iniciar Quiz
-        </button>
-    </div>
-
-    <!-- TELA 1: CADASTRO DO CANDIDATO -->
-    <div id="welcome-screen" class="screen-padding" style="display: none; text-align: center;">
-        <h2 style="margin-bottom: 10px; color: #0f172a;">Identificação do Candidato</h2>
-        <p style="color: #64748b; margin-bottom: 20px; font-size: 14px;">Digite seu nome para acompanhar seu progresso e registrar sua pontuação no ranking geral.</p>
-        
-        <div class="input-group">
-            <label for="username">Nome Completo:</label>
-            <input type="text" id="username" placeholder="Digite seu nome aqui...">
-        </div>
-
-        <button class="nav-btn primary" style="width: 100%; padding: 14px; font-size: 16px;" onclick="startQuiz()">
-            Acessar Simulado
         </button>
     </div>
 
     <!-- TELA 2: ÁREA DE QUESTÕES -->
     <div id="quiz-screen" class="screen-padding" style="display: none;">
-        
-        <!-- CAPA INTERNA DO QUIZ -->
-        <div class="quiz-header-banner">
-            <h1>💻 Simulado de Informática — Hardware</h1>
-            <p>Resolva questões focadas em concursos públicos e teste seus conhecimentos</p>
-        </div>
 
         <!-- RESUMAÇO PEDAGÓGICO DE HARDWARE -->
         <div class="summary-card">
@@ -384,7 +347,7 @@
             <button class="mode-btn" id="btn-prova" onclick="setMode('prova')">Modo Simulado</button>
         </div>
 
-        <!-- MENSAGEM COM FONTE SEGUIRA SOBRE TEMPO (EXIBIDA APENAS NO MODO PROVA) -->
+        <!-- MENSAGEM COM AVISO SOBRE TEMPO (MODO SIMULADO) -->
         <div id="timer-info" class="timer-info-banner">
             ⏱️ <strong>Orientação de Concurso:</strong> Segundo especialistas de bancas examinadoras, o tempo médio por questão é de <strong>3 minutos</strong> (incluindo cartão-resposta). O tempo ideal para um excelente desempenho é de até <strong>1min 30s</strong> por questão objetiva de informática.
         </div>
@@ -406,16 +369,13 @@
         </div>
     </div>
 
-    <!-- TELA 3: RESULTADO E RANKING -->
+    <!-- TELA 3: RESULTADO FINAL -->
     <div id="results-screen" class="screen-padding" style="display: none; text-align: center;">
-        <h2>Resultado Final do Simulado</h2>
-        <p id="score-text" style="margin: 15px 0; font-weight: bold; color: #475569;"></p>
-        <p id="time-spent-text" style="font-size: 13px; color: #64748b; margin-bottom: 20px;"></p>
+        <h2 style="margin-bottom: 15px; color: #0f172a;">Resultado Final do Simulado</h2>
+        <p id="score-text" style="font-size: 18px; margin: 15px 0; font-weight: bold; color: #2563eb;"></p>
+        <p id="time-spent-text" style="font-size: 14px; color: #64748b; margin-bottom: 30px;"></p>
 
-        <h3 style="text-align: left; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">🏆 Top 10 Melhores Colocados</h3>
-        <ul id="ranking-list" class="ranking-list"></ul>
-
-        <button class="nav-btn primary" style="width: 100%; margin-top: 15px;" onclick="restartQuiz()">Refazer Simulado</button>
+        <button class="nav-btn primary" style="width: 100%; padding: 14px;" onclick="restartQuiz()">Refazer Simulado</button>
     </div>
 
 </div>
@@ -432,20 +392,11 @@
     let currentQuestion = 0;
     let selectedAnswers = new Array(questions.length).fill(null);
     let currentMode = "treino"; // "treino" ou "prova"
-    let userName = "";
     let timerInterval = null;
     let totalSeconds = 0;
 
-    function goToRegistration() {
-        document.getElementById("home-cover-screen").style.display = "none";
-        document.getElementById("welcome-screen").style.display = "block";
-    }
-
     function startQuiz() {
-        const inputName = document.getElementById("username").value.trim();
-        if(!inputName) { alert("Informe seu nome!"); return; }
-        userName = inputName;
-        document.getElementById("welcome-screen").style.display = "none";
+        document.getElementById("home-cover-screen").style.display = "none";
         document.getElementById("quiz-screen").style.display = "block";
         loadQuestion();
     }
@@ -542,52 +493,23 @@
         selectedAnswers.forEach((ans, i) => { if(ans === questions[i].answer) score++; });
         const percentage = Math.round((score / questions.length) * 100);
 
-        document.getElementById("score-text").innerText = `${userName}, você acertou ${score} de ${questions.length} (${percentage}%).`;
+        document.getElementById("score-text").innerText = `Você acertou ${score} de ${questions.length} questões (${percentage}% de aproveitamento).`;
         
         if(currentMode === "prova") {
             const mins = Math.floor(totalSeconds / 60);
             const secs = totalSeconds % 60;
-            document.getElementById("time-spent-text").innerText = `Tempo total de resolução: ${mins}m ${secs}s (Média por questão: ${Math.round(totalSeconds / questions.length)}s).`;
-        }
-
-        saveRanking(userName, score, percentage);
-        displayRanking();
-    }
-
-    function saveRanking(name, score, percentage) {
-        let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
-        const idx = ranking.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
-
-        if(idx !== -1) {
-            if(score > ranking[idx].score) {
-                ranking[idx].score = score;
-                ranking[idx].percentage = percentage;
-            }
+            document.getElementById("time-spent-text").innerText = `Tempo total gasto: ${mins}m ${secs}s (Média por questão: ${Math.round(totalSeconds / questions.length)}s).`;
         } else {
-            ranking.push({ name, score, percentage });
+            document.getElementById("time-spent-text").innerText = "";
         }
-
-        ranking.sort((a, b) => b.score - a.score);
-        ranking = ranking.slice(0, 10);
-        localStorage.setItem("quizRanking", JSON.stringify(ranking));
-    }
-
-    function displayRanking() {
-        const list = document.getElementById("ranking-list");
-        list.innerHTML = "";
-        let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
-
-        ranking.forEach((player, i) => {
-            const li = document.createElement("li");
-            li.className = "ranking-item";
-            li.innerHTML = `<span>#${i + 1} ${player.name}</span> <span>${player.score}/${questions.length} (${player.percentage}%)</span>`;
-            list.appendChild(li);
-        });
     }
 
     function restartQuiz() {
         currentQuestion = 0;
         selectedAnswers.fill(null);
+        if(timerInterval) clearInterval(timerInterval);
+        timerInterval = null;
+        totalSeconds = 0;
         document.getElementById("results-screen").style.display = "none";
         document.getElementById("home-cover-screen").style.display = "block";
     }
