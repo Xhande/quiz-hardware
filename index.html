@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Informática - Hardware</title>
+    <title>Simulado de Hardware - Concursos</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
@@ -26,33 +26,27 @@
             border-radius: 16px; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
             width: 100%; 
-            max-width: 650px; 
+            max-width: 680px; 
             overflow: hidden;
         }
 
         .screen-padding { padding: 30px; }
-
-        /* TELA DE CAPA */
-        .cover-image-banner { width: 100%; height: 240px; object-fit: cover; display: block; }
-        .cover-badge { display: inline-block; background-color: #e0e7ff; color: #4338ca; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; }
-        .cover-content { padding: 30px; text-align: center; }
-        .cover-content h1 { font-size: 26px; color: #0f172a; margin-bottom: 12px; border: none; }
-        .cover-content p { color: #64748b; font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
         
-        /* RESUMAÇO PEDAGÓGICO DE HARDWARE */
+        /* BANNER RESUMAÇO */
         .summary-card {
-            background-color: #f8fafc;
-            border-left: 4px solid #2563eb;
+            background-color: #f3e8ff;
+            border-left: 5px solid #7e22ce;
+            padding: 16px;
             border-radius: 8px;
-            padding: 14px 16px;
             margin-bottom: 20px;
-            font-size: 13px;
-            color: #334155;
+            font-size: 14px;
+            color: #4c1d95;
             line-height: 1.5;
         }
-        .summary-card strong { color: #0f172a; }
 
-        /* SELETOR DE MODOS COM VISUAL AZUL ORIGINAL */
+        .summary-card strong { color: #581c87; }
+
+        /* BOTOES DE MODO */
         .mode-selector {
             display: flex;
             gap: 10px;
@@ -62,123 +56,120 @@
 
         .mode-btn {
             flex: 1;
-            padding: 10px 12px;
-            border: 2px solid #2563eb;
+            padding: 10px 14px;
+            border: 2px solid #7e22ce;
             background-color: transparent;
-            color: #2563eb;
+            color: #7e22ce;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
         }
 
         .mode-btn.active {
-            background-color: #2563eb;
+            background-color: #7e22ce;
             color: white;
         }
 
-        /* MENSAGEM DE ORIENTAÇÃO DE TEMPO */
+        /* BANNER DE AVISO DE TEMPO DO MODO PROVA */
         .timer-info-banner {
-            background-color: #eff6ff;
-            border: 1px solid #dbeafe;
-            border-left: 4px solid #2563eb;
+            background-color: #fff7ed;
+            border: 1px solid #ffedd5;
+            border-left: 4px solid #f97316;
             padding: 12px;
             border-radius: 6px;
             font-size: 13px;
-            color: #1e40af;
+            color: #9a3412;
             margin-bottom: 15px;
             display: none;
-            line-height: 1.4;
         }
 
         /* BARRA DE PROGRESSO */
-        .progress-bar-bg { width: 100%; height: 8px; background-color: #e2e8f0; border-radius: 4px; margin-bottom: 15px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; width: 0%; background-color: #2563eb; transition: width 0.3s ease; }
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
 
-        .timer-display { font-size: 14px; font-weight: bold; color: #dc2626; float: right; }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: #7e22ce;
+            transition: width 0.3s ease;
+        }
 
-        /* PERGUNTAS E OPÇÕES */
+        .timer-display {
+            font-size: 14px;
+            font-weight: bold;
+            color: #c2410c;
+            float: right;
+        }
+
+        /* ENUNCIADO E OPÇÕES */
         .question-text { font-size: 17px; font-weight: 600; color: #0f172a; margin-bottom: 18px; line-height: 1.4; }
         .options-container { display: flex; flex-direction: column; gap: 10px; }
         .option-btn { background-color: #f8fafc; border: 2px solid #cbd5e1; padding: 12px 15px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s ease; }
-        .option-btn:hover:not([disabled]) { background-color: #e2e8f0; border-color: #94a3b8; }
-        .option-btn.selected { border-color: #2563eb; background-color: #eff6ff; font-weight: 600; }
+        .option-btn:hover:not([disabled]) { background-color: #f1f5f9; border-color: #94a3b8; }
+        .option-btn.selected { border-color: #7e22ce; background-color: #f3e8ff; font-weight: 600; }
         .option-btn.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d; font-weight: bold; }
         .option-btn.wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c; }
         
         .explanation { margin-top: 15px; padding: 12px; border-radius: 8px; background-color: #f1f5f9; font-size: 13px; line-height: 1.4; color: #334155; display: none; }
 
-        /* BOTÕES E NAVEGAÇÃO */
-        .primary-btn { width: 100%; padding: 14px; background-color: #2563eb; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-        .primary-btn:hover { background-color: #1d4ed8; }
-        
+        /* NAVEGAÇÃO */
         .nav-buttons { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; }
         .nav-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background-color: #cbd5e1; color: #475569; }
-        .nav-btn.primary { background-color: #2563eb; color: white; }
-        .nav-btn.primary:hover { background-color: #1d4ed8; }
+        .nav-btn.primary { background-color: #7e22ce; color: white; }
+        .nav-btn.primary:hover { background-color: #6b21a8; }
 
-        /* FORMULÁRIO E RANKING */
+        /* FORMULARIO E RESULTADOS */
         .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #334155; }
-        .input-group input { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; outline: none; }
-        .input-group input:focus { border-color: #2563eb; }
-
-        .ranking-title { font-size: 18px; font-weight: bold; color: #1e293b; margin: 25px 0 15px 0; border-top: 2px solid #e2e8f0; padding-top: 15px; text-align: left; }
-        .ranking-list { list-style: none; padding: 0; margin-bottom: 25px; text-align: left; }
-        .ranking-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 8px; font-weight: 600; color: #334155; }
-        .ranking-item:nth-child(1) { background-color: #fef9c3; border-color: #fde047; color: #854d0e; }
-        .ranking-item:nth-child(2) { background-color: #f1f5f9; border-color: #cbd5e1; color: #475569; }
-        .ranking-item:nth-child(3) { background-color: #ffedd5; border-color: #fed7aa; color: #9a3412; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .input-group input { width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; }
+        .ranking-list { list-style: none; padding: 0; margin: 15px 0; }
+        .ranking-item { display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 6px; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="quiz-container">
 
-    <!-- TELA 1: CAPA -->
-    <div id="cover-screen">
-        <img src="Capa.jpg" alt="Capa do Quiz" class="cover-image-banner">
-        <div class="cover-content">
-            <span class="cover-badge">⚡ Desafio do Conhecimento</span>
-            <h1>Quiz de Informática & Hardware</h1>
-            <p>Aprenda, pratique questões técnicas e dispute as melhores colocações no ranking!</p>
-            <button class="primary-btn" onclick="goToRegister()">Iniciar Quiz</button>
-        </div>
-    </div>
-
-    <!-- TELA 2: IDENTIFICAÇÃO -->
-    <div id="welcome-screen" class="screen-padding" style="display: none; text-align: center;">
-        <h2 style="margin-bottom: 10px; color: #0f172a;">Identificação do Participante</h2>
-        <p style="color: #64748b; margin-bottom: 25px; font-size: 15px;">Informe seu nome para salvar seu histórico no ranking do quiz.</p>
+    <!-- TELA 1: CADASTRO -->
+    <div id="welcome-screen" class="screen-padding" style="text-align: center;">
+        <h2 style="margin-bottom: 10px; color: #0f172a;">Simulado de Informática: Hardware</h2>
+        <p style="color: #64748b; margin-bottom: 20px; font-size: 14px;">Identifique-se para iniciar a resolução e salvar seu desempenho no ranking geral.</p>
         
         <div class="input-group">
-            <label for="username">Nome Completo ou Apelido:</label>
-            <input type="text" id="username" placeholder="Digite seu nome aqui...">
+            <label for="username">Nome Completo do Candidato:</label>
+            <input type="text" id="username" placeholder="Digite seu nome...">
         </div>
 
-        <button class="primary-btn" onclick="startQuiz()">Cadastrar e Continuar</button>
+        <button class="nav-btn primary" style="width: 100%; padding: 14px; font-size: 16px;" onclick="startQuiz()">Entrar no Simulado</button>
     </div>
 
-    <!-- TELA 3: QUESTÕES -->
+    <!-- TELA 2: ÁREA DE QUESTÕES -->
     <div id="quiz-screen" class="screen-padding" style="display: none;">
         
-        <!-- RESUMAÇO DE HARDWARE -->
+        <!-- RESUMAÇO PEDAGÓGICO DE HARDWARE -->
         <div class="summary-card">
-            <p><strong>CPU (Processador):</strong> Processa instruções e faz os cálculos do sistema.<br>
-            <strong>Memória RAM:</strong> Memória primária e volátil (esvazia ao desligar).<br>
-            <strong>SSD/HD:</strong> Armazenamento secundário e permanente (não-volátil).</p>
+            <p><strong>CPU (Processador):</strong> Cérebro do sistema, executa cálculos e instruções.<br>
+            <strong>Memória RAM:</strong> Armazenamento primário, volátil (perde dados ao desligar).<br>
+            <strong>SSD/HD:</strong> Armazenamento secundário, não-volátil (dados permanentes).</p>
         </div>
 
-        <!-- SELETOR DE MODOS (OPÇÃO 1 LIMPA) -->
+        <!-- SELETOR DE MODO DE RESOLUÇÃO -->
         <div class="mode-selector">
-            <button class="mode-btn active" id="btn-treino" onclick="setMode('treino')">Modo Estudo</button>
-            <button class="mode-btn" id="btn-prova" onclick="setMode('prova')">Modo Simulado</button>
+            <button class="mode-btn active" id="btn-treino" onclick="setMode('treino')">Modo Treino (Feedback Imediato)</button>
+            <button class="mode-btn" id="btn-prova" onclick="setMode('prova')">Modo Prova (Gabarito no Final)</button>
         </div>
 
-        <!-- AVISO DE TEMPO RECOMENDADO -->
+        <!-- MENSAGEM COM FONTE SEGUIRA SOBRE TEMPO (EXIBIDA APENAS NO MODO PROVA) -->
         <div id="timer-info" class="timer-info-banner">
-            ⏱️ <strong>Instrução de Prova:</strong> Em concursos públicos, o tempo médio para resolver uma questão objetiva é de <strong>3 minutos</strong> (já calculando o cartão-resposta). Para obter um excelente aproveitamento, tente responder cada questão em até <strong>1min 30s</strong>.
+            ⏱️ <strong>Orientação de Concurso:</strong> Segundo especialistas de bancas examinadoras, o tempo médio por questão é de <strong>3 minutos</strong> (incluindo cartão-resposta). O tempo ideal para um excelente desempenho é de até <strong>1min 30s</strong> por questão objetiva de informática.
         </div>
 
         <div class="progress-bar-bg"><div id="progress-bar" class="progress-bar-fill"></div></div>
@@ -198,69 +189,39 @@
         </div>
     </div>
 
-    <!-- TELA 4: RESULTADO E RANKING -->
+    <!-- TELA 3: RESULTADO E RANKING -->
     <div id="results-screen" class="screen-padding" style="display: none; text-align: center;">
-        <h2 style="font-size: 28px; color: #0f172a;">Quiz Concluído!</h2>
-        <p id="score-text" style="margin: 15px 0 5px 0; font-weight: 600; color: #475569; font-size: 18px;"></p>
-        <p id="time-spent-text" style="font-size: 14px; color: #64748b; margin-bottom: 15px;"></p>
+        <h2>Resultado Final do Simulado</h2>
+        <p id="score-text" style="margin: 15px 0; font-weight: bold; color: #475569;"></p>
+        <p id="time-spent-text" style="font-size: 13px; color: #64748b; margin-bottom: 20px;"></p>
 
-        <div class="ranking-title">🏆 Top 10 Melhores Pontuações</div>
+        <h3 style="text-align: left; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">🏆 Top 10 Melhores Colocados</h3>
         <ul id="ranking-list" class="ranking-list"></ul>
 
-        <button class="primary-btn" onclick="restartQuiz()">Novo Jogador / Tentar Novamente</button>
+        <button class="nav-btn primary" style="width: 100%; margin-top: 15px;" onclick="restartQuiz()">Refazer Simulado</button>
     </div>
 
 </div>
 
 <script>
     const questions = [
-        {
-            question: "Qual componente é considerado o 'cérebro' do computador, responsável por processar dados e executar instruções?",
-            options: ["Placa de Vídeo (GPU)", "Memória RAM", "Processador (CPU)", "Disco Rígido (HD)"],
-            answer: 2,
-            explanation: "A CPU (Unidade Central de Processamento) gerencia e executa as instruções do sistema e dos programas."
-        },
-        {
-            question: "Qual tipo de memória é volátil, ou seja, perde todos os dados quando o computador é desligado?",
-            options: ["Memória RAM", "SSD", "ROM", "HD Externo"],
-            answer: 0,
-            explanation: "A memória RAM armazena temporariamente os dados que o computador precisa no momento, sendo esvaziada ao desligar o sistema."
-        },
-        {
-            question: "Qual dispositivo de armazenamento abaixo oferece maior velocidade de leitura e escrita de dados?",
-            options: ["HD SATA III", "Pendrive USB 2.0", "SSD NVMe M.2", "Disco Óptico (DVD)"],
-            answer: 2,
-            explanation: "Os SSDs NVMe M.2 utilizam o barramento PCIe, oferecendo velocidades muito superiores aos HDs e SSDs SATA tradicionais."
-        },
-        {
-            question: "Qual componente é responsável por fornecer energia elétrica regulada a todas as peças do computador?",
-            options: ["Placa-mãe", "Fonte de Alimentação", "Estabilizador", "Cooler"],
-            answer: 1,
-            explanation: "A fonte de alimentação converte a corrente alternada da tomada em corrente contínua necessária para os componentes internos."
-        },
-        {
-            question: "Qual porta de conexão é amplamente utilizada para transmitir vídeo e áudio de alta definição digital simultaneamente?",
-            options: ["VGA", "DVI", "HDMI", "PS/2"],
-            answer: 2,
-            explanation: "O HDMI suporta a transmissão integrada de áudio e vídeo em alta definição em um único cabo."
-        }
+        { question: "Qual componente é responsável por processar dados e executar as instruções do sistema?", options: ["GPU", "Memória RAM", "Processador (CPU)", "HD"], answer: 2, explanation: "A CPU é a Unidade Central de Processamento, responsável pela execução de instruções." },
+        { question: "A memória RAM é classificada como:", options: ["Volátil e Primária", "Não-volátil e Secundária", "Apenas Leitura (ROM)", "Armazenamento Externo"], answer: 0, explanation: "A RAM é volátil (perde dados ao desligar) e de acesso rápido (primária)." },
+        { question: "Qual dispositivo utiliza barramento PCIe para atingir altíssimas velocidades?", options: ["HD SATA", "SSD NVMe M.2", "CD-ROM", "Fita Dat"], answer: 1, explanation: "Os SSDs NVMe M.2 usam as linhas PCIe para entregar transferências muito superiores ao protocolo SATA." },
+        { question: "Responsável por regular e fornecer a corrente elétrica adequada ao computador:", options: ["Placa-mãe", "Fonte de Alimentação", "Cooler", "Estabilizador"], answer: 1, explanation: "A fonte converte a corrente alternada da rede em corrente contínua para os componentes." },
+        { question: "Qual interface transmite simultaneamente áudio e vídeo em sinal puramente digital?", options: ["VGA", "DVI-A", "HDMI", "P2"], answer: 2, explanation: "O HDMI unifica a transmissão de vídeo e áudio digitais em um único cabo." }
     ];
 
     let currentQuestion = 0;
     let selectedAnswers = new Array(questions.length).fill(null);
-    let currentMode = "treino";
+    let currentMode = "treino"; // "treino" ou "prova"
     let userName = "";
     let timerInterval = null;
     let totalSeconds = 0;
 
-    function goToRegister() {
-        document.getElementById("cover-screen").style.display = "none";
-        document.getElementById("welcome-screen").style.display = "block";
-    }
-
     function startQuiz() {
         const inputName = document.getElementById("username").value.trim();
-        if(!inputName) { alert("Por favor, informe seu nome!"); return; }
+        if(!inputName) { alert("Informe seu nome!"); return; }
         userName = inputName;
         document.getElementById("welcome-screen").style.display = "none";
         document.getElementById("quiz-screen").style.display = "block";
@@ -324,7 +285,7 @@
         });
 
         if(currentMode === "treino" && selectedAnswers[currentQuestion] !== null) {
-            exp.innerText = "Explicação: " + q.explanation;
+            exp.innerText = "Gabarito Comentado: " + q.explanation;
             exp.style.display = "block";
         }
 
@@ -359,14 +320,12 @@
         selectedAnswers.forEach((ans, i) => { if(ans === questions[i].answer) score++; });
         const percentage = Math.round((score / questions.length) * 100);
 
-        document.getElementById("score-text").innerText = `${userName}, você acertou ${score} de ${questions.length} questões (${percentage}% de aproveitamento).`;
+        document.getElementById("score-text").innerText = `${userName}, você acertou ${score} de ${questions.length} (${percentage}%).`;
         
         if(currentMode === "prova") {
             const mins = Math.floor(totalSeconds / 60);
             const secs = totalSeconds % 60;
-            document.getElementById("time-spent-text").innerText = `Tempo gasto na resolução: ${mins}m ${secs}s (Tempo médio por questão: ${Math.round(totalSeconds / questions.length)}s).`;
-        } else {
-            document.getElementById("time-spent-text").innerText = "";
+            document.getElementById("time-spent-text").innerText = `Tempo total de resolução: ${mins}m ${secs}s (Média por questão: ${Math.round(totalSeconds / questions.length)}s).`;
         }
 
         saveRanking(userName, score, percentage);
@@ -375,7 +334,7 @@
 
     function saveRanking(name, score, percentage) {
         let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
-        const idx = ranking.findIndex(p => p.name.trim().toLowerCase() === name.trim().toLowerCase());
+        const idx = ranking.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
 
         if(idx !== -1) {
             if(score > ranking[idx].score) {
@@ -396,21 +355,10 @@
         list.innerHTML = "";
         let ranking = JSON.parse(localStorage.getItem("quizRanking")) || [];
 
-        if (ranking.length === 0) {
-            list.innerHTML = "<li class='ranking-item'>Nenhum resultado registrado ainda.</li>";
-            return;
-        }
-
         ranking.forEach((player, i) => {
             const li = document.createElement("li");
             li.className = "ranking-item";
-            
-            let playerPercent = player.percentage;
-            if (playerPercent === undefined || isNaN(playerPercent)) {
-                playerPercent = Math.round((player.score / questions.length) * 100);
-            }
-
-            li.innerHTML = `<span>#${i + 1} ${player.name}</span> <span>${player.score}/${questions.length} acertos (${playerPercent}%)</span>`;
+            li.innerHTML = `<span>#${i + 1} ${player.name}</span> <span>${player.score}/${questions.length} (${player.percentage}%)</span>`;
             list.appendChild(li);
         });
     }
@@ -418,9 +366,8 @@
     function restartQuiz() {
         currentQuestion = 0;
         selectedAnswers.fill(null);
-        document.getElementById("username").value = "";
         document.getElementById("results-screen").style.display = "none";
-        document.getElementById("cover-screen").style.display = "block";
+        document.getElementById("welcome-screen").style.display = "block";
     }
 </script>
 </body>
