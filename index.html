@@ -32,68 +32,31 @@
 
         .screen-padding { padding: 30px; }
         
-        /* ESTILOS DO RESUMO COMPLETO */
+        /* BANNER DE RESUMO FIXO DE CONTEÚDO */
         .summary-card {
             background-color: #f8fafc;
             border: 1px solid #e2e8f0;
             border-left: 5px solid #7e22ce;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            max-height: 400px;
-            overflow-y: auto;
-            font-size: 14px;
-            line-height: 1.6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
             color: #334155;
         }
 
         .summary-card h2 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: #7e22ce;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 5px;
-        }
-
-        .summary-card h3 {
-            font-size: 1rem;
-            color: #581c87;
-            margin-top: 14px;
-            margin-bottom: 6px;
-        }
-
-        .summary-card ul, .summary-card ol {
-            padding-left: 20px;
             margin-bottom: 8px;
+        }
+
+        .summary-card ul {
+            padding-left: 20px;
+            margin-bottom: 0;
         }
 
         .summary-card li {
             margin-bottom: 4px;
-        }
-
-        .box-dica, .box-macete, .box-obs {
-            padding: 10px 12px;
-            border-radius: 6px;
-            margin: 10px 0;
-            font-size: 13px;
-        }
-
-        .box-dica {
-            background-color: #ecfdf5;
-            border-left: 4px solid #059669;
-            color: #065f46;
-        }
-
-        .box-macete {
-            background-color: #fffbeb;
-            border-left: 4px solid #d97706;
-            color: #92400e;
-        }
-
-        .box-obs {
-            background-color: #eef2ff;
-            border-left: 4px solid #4f46e5;
-            color: #3730a3;
         }
 
         /* BOTOES DE MODO */
@@ -204,121 +167,14 @@
     <!-- TELA 2: ÁREA DE QUESTÕES -->
     <div id="quiz-screen" class="screen-padding" style="display: none;">
         
-        <!-- RESUMO COMPLETO DE HARDWARE -->
+        <!-- RESUMO DE HARDWARE -->
         <div class="summary-card">
-            <h2>🚀 Guia Resumido de Hardware</h2>
-
-            <h3>1. Unidades de Medida & Grandezas</h3>
+            <h2>📌 Pontos-Chave sobre Hardware</h2>
             <ul>
-                <li><strong>Base do sistema:</strong> A menor unidade de informação é o bit (b)[cite: 1]. 1 Byte (B) equivale exatamente a 8 bits[cite: 1].</li>
-                <li><strong>Atenção às siglas:</strong> <em>b</em> minúsculo representa bit; <em>B</em> maiúsculo representa Byte[cite: 1].</li>
+                <li><strong>Processador (CPU):</strong> Cérebro do sistema, executa instruções e realiza cálculos (ULA + UC).</li>
+                <li><strong>Memória RAM:</strong> Memória principal, volátil, temporária e de acesso rápido para programas em uso.</li>
+                <li><strong>Armazenamento (SSD):</strong> Memória secundária, não-volátil, mais rápida e resistente que o HD tradicional.</li>
             </ul>
-            <div class="box-dica">
-                💡 <strong>Dica de Prova:</strong> Para converter de Mbps (Megabits) para MBps (MegaBytes), basta dividir por 8 (ex.: 100 Mbps / 8 = 12,5 MBps)[cite: 1].
-            </div>
-            <div class="box-macete">
-                🎯 <strong>Macete:</strong> Fator de conversão em provas: a teoria computacional usa a base binária (2<sup>10</sup> = 1024), mas a maioria das bancas aceita o arredondamento decimal (1000) para facilitar as contas[cite: 1].
-            </div>
-
-            <h3>2. Arquitetura Fundamental & Conceitos Básicos</h3>
-            <ul>
-                <li><strong>Dado vs. Informação:</strong> Dado é o elemento bruto sem contexto (ex.: "38"); Informação é o dado processado e com sentido (ex.: "Temperatura atual: 38 °C").</li>
-                <li><strong>Arquitetura de Von Neumann:</strong> Modelo base dos computadores modernos. Sua característica principal é armazenar dados e instruções na mesma memória principal.</li>
-            </ul>
-            <div class="box-obs">
-                📌 <strong>Observação:</strong> O Gargalo de Von Neumann ocorre porque o barramento único de transferência cria uma fila de espera entre a CPU e a memória, limitando a velocidade máxima de processamento.
-            </div>
-
-            <h3>3. Dispositivos de Entrada e Saída (E/S ou I/O)</h3>
-            <ul>
-                <li><strong>Entrada (Input):</strong> Enviam dados do mundo externo para o processador (Ex.: teclado, mouse, escâner, microfone, webcam, mesa digitalizadora).</li>
-                <li><strong>Saída (Output):</strong> Recebem os dados processados e mostram ao usuário (Ex.: monitor tradicional, impressora, caixas de som, plotter).</li>
-                <li><strong>Entrada e Saída (Híbridos):</strong> Realizam ambas as funções (Ex.: monitor touch screen, impressora multifuncional, modem, pendrive, drive de disco).</li>
-            </ul>
-
-            <h3>4. Processador (CPU) & Hierarquia de Memória</h3>
-            <ul>
-                <li><strong>Componentes da CPU:</strong>
-                    <ul>
-                        <li><strong>ULA:</strong> Unidade Lógica e Aritmética (faz os cálculos).</li>
-                        <li><strong>UC:</strong> Unidade de Controle (gerencia o tráfego e interpreta instruções).</li>
-                        <li><strong>Registradores:</strong> Memória interna de curtíssimo alcance e altíssima velocidade.</li>
-                        <li><strong>Coprocessador Matemático:</strong> Auxilia em cálculos complexos.</li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="box-macete">
-                🎯 <strong>Macete da Pirâmide de Memória:</strong><br>
-                Do mais rápido / mais caro / menor capacidade para o mais lento / mais barato / maior capacidade:<br>
-                <strong>Registradores &rarr; Cache &rarr; RAM &rarr; Memória Secundária (HD/SSD)</strong>
-            </div>
-
-            <h3>5. Tipos e Classificação das Memórias</h3>
-            <ul>
-                <li><strong>RAM:</strong> Memória Principal, de leitura/escrita, volátil (perde os dados ao desligar) e de acesso aleatório.</li>
-                <li><strong>ROM:</strong> Memória de leitura, não-volátil (gravada pelo fabricante). Armazena os programas essenciais do sistema:
-                    <ul>
-                        <li><strong>BIOS:</strong> Sistema básico de entrada e saída.</li>
-                        <li><strong>POST:</strong> Teste de autochecagem do hardware na inicialização.</li>
-                        <li><strong>SETUP:</strong> Interface de configuração de hardware (salva dados no chip CMOS alimentado por bateria).</li>
-                    </ul>
-                </li>
-                <li><strong>Cache:</strong> Memória intermediária ultrarrápida (L1, L2, L3) localizada entre o Processador e a RAM.</li>
-                <li><strong>Buffer:</strong> Memória temporária em periféricos para equilibrar velocidades de transferência.</li>
-                <li><strong>Memória Virtual:</strong> Uso de uma área do disco rígido (arquivo de paginação / swap) simulando memória RAM.</li>
-            </ul>
-            <div class="box-dica">
-                💡 <strong>Dica de Prova:</strong> Memórias voláteis precisam de energia para manter os dados. Se desligar a tomada: RAM, Cache e Registradores apagam; ROM, HD e SSD mantêm os arquivos!
-            </div>
-
-            <h3>6. Memórias Auxiliares (Armazenamento Secundário)</h3>
-            <ul>
-                <li><strong>Magnéticas:</strong> HD/HDD (grande capacidade, peças mecânicas móveis, sensível a choques).</li>
-                <li><strong>FLASH (EEPROM - Sólida):</strong> Sem partes mecânicas, rápida e resistente.
-                    <ul>
-                        <li><strong>NAND:</strong> Acesso sequencial/em blocos, usada em Pendrives, SSDs e Cartões de Memória.</li>
-                        <li><strong>NOR:</strong> Acesso aleatório, grava de forma mais lenta, usada em chips de firmware.</li>
-                    </ul>
-                </li>
-                <li><strong>SSHD:</strong> Dispositivo híbrido (disco magnético + chip de memória FLASH).</li>
-            </ul>
-
-            <h3>7. Barramentos e Interfaces de Conexão</h3>
-            <ul>
-                <li><strong>Barramentos Internos:</strong>
-                    <ul>
-                        <li><strong>Dados:</strong> Bidirecional (transporta a informação em si).</li>
-                        <li><strong>Endereço:</strong> Unidirecional (CPU &rarr; Memória: define onde o dado está).</li>
-                        <li><strong>Controle:</strong> Sinais de sincronização e ordens de leitura/escrita.</li>
-                    </ul>
-                </li>
-                <li><strong>Interfaces de Armazenamento:</strong>
-                    <ul>
-                        <li><strong>SATA:</strong> Padrão serial tradicional para HDs e SSDs SATA.</li>
-                        <li><strong>NVMe:</strong> Protocolo de altíssima velocidade conectado diretamente ao barramento PCI Express.</li>
-                    </ul>
-                </li>
-                <li><strong>USB (Barramento Externo):</strong> Aceita até 127 dispositivos em cadeia.
-                    <ul>
-                        <li><strong>Plug and Play:</strong> O sistema reconhece e configura o dispositivo automaticamente.</li>
-                        <li><strong>Hot Swap:</strong> Permite conectar e desconectar com o computador ligado.</li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="box-obs">
-                📌 <strong>Observação:</strong> O USB 2.0 atinge até 480 Mbps; o USB 3.0 atinge 4,8 Gbps (reconhecido pelo conector azul); e o USB 3.1 tipo C atinge até 10 Gbps.
-            </div>
-
-            <h3>8. Sequência de Inicialização (Boot)</h3>
-            <ol>
-                <li><strong>Energia:</strong> A fonte liga e estabiliza as tensões.</li>
-                <li><strong>BIOS/UEFI:</strong> A CPU executa as instruções do firmware.</li>
-                <li><strong>POST:</strong> O hardware básico (RAM, teclado, vídeo) é testado.</li>
-                <li><strong>Bootloader:</strong> O setor de boot localiza o Sistema Operacional no HD/SSD e o carrega na memória RAM.</li>
-            </ol>
-            <div class="box-dica">
-                💡 <strong>Dica de Prova:</strong> O UEFI é o substituto moderno do antigo BIOS. Ele permite inicialização mais rápida, suporte a discos maiores que 2 TB e possui o recurso de segurança Secure Boot.
-            </div>
         </div>
 
         <!-- SELETOR DE MODO DE RESOLUÇÃO -->
