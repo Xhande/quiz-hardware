@@ -31,6 +31,28 @@
         }
 
         .screen-padding { padding: 30px; }
+
+        /* CAPA / CABEÇALHO DO QUIZ */
+        .quiz-header-banner {
+            background: linear-gradient(135deg, #1e40af, #2563eb);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .quiz-header-banner h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .quiz-header-banner p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
         
         /* BANNER RESUMAÇO */
         .summary-card {
@@ -193,20 +215,26 @@
     <!-- TELA 2: ÁREA DE QUESTÕES -->
     <div id="quiz-screen" class="screen-padding" style="display: none;">
         
+        <!-- CAPA DE APRESENTAÇÃO DO QUIZ -->
+        <div class="quiz-header-banner">
+            <h1>💻 Simulado de Informática — Hardware</h1>
+            <p>Resolva questões focadas em concursos públicos e teste seus conhecimentos</p>
+        </div>
+
         <!-- RESUMAÇO PEDAGÓGICO DE HARDWARE -->
         <div class="summary-card">
             <p style="font-size: 15px; font-weight: bold; margin-bottom: 8px;">🚀 Guia Resumido de Hardware</p>
 
             <h3>1. Unidades de Medida & Grandezas</h3>
             <ul>
-                <li><strong>Base do sistema:</strong> A menor unidade de informação é o bit (b)[cite: 1]. 1 Byte (B) equivale exatamente a 8 bits[cite: 1].</li>
-                <li><strong>Atenção às siglas:</strong> <em>b</em> minúsculo representa bit; <em>B</em> maiúsculo representa Byte[cite: 1].</li>
+                <li><strong>Base do sistema:</strong> A menor unidade de informação é o bit (b). 1 Byte (B) equivale exatamente a 8 bits.</li>
+                <li><strong>Atenção às siglas:</strong> <em>b</em> minúsculo representa bit; <em>B</em> maiúsculo representa Byte.</li>
             </ul>
             <div class="box-dica">
-                💡 <strong>Dica de Prova:</strong> Para converter de Mbps (Megabits) para MBps (MegaBytes), basta dividir por 8 (ex.: 100 Mbps / 8 = 12,5 MBps)[cite: 1].
+                💡 <strong>Dica de Prova:</strong> Para converter de Mbps (Megabits) para MBps (MegaBytes), basta dividir por 8 (ex.: 100 Mbps / 8 = 12,5 MBps).
             </div>
             <div class="box-macete">
-                🎯 <strong>Macete:</strong> Fator de conversão em provas: a teoria computacional usa a base binária (2<sup>10</sup> = 1024), mas a maioria das bancas aceita o arredondamento decimal (1000) para facilitar as contas[cite: 1].
+                🎯 <strong>Macete:</strong> Fator de conversão em provas: a teoria computacional usa a base binária (2<sup>10</sup> = 1024), mas a maioria das bancas aceita o arredondamento decimal (1000) para facilitar as contas.
             </div>
 
             <h3>2. Arquitetura Fundamental & Conceitos Básicos</h3>
