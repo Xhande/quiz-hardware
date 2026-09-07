@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulado de Hardware - Concursos</title>
+    <title>Quiz de Hardware - Concursos</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
@@ -32,7 +32,33 @@
 
         .screen-padding { padding: 30px; }
 
-        /* CAPA / CABEÇALHO DO QUIZ */
+        /* CAPA INICIAL DO SITE (HERO COVER) */
+        .site-cover {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .cover-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .cover-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .cover-subtitle {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* CAPA / CABEÇALHO DA ÁREA DE QUESTÕES */
         .quiz-header-banner {
             background: linear-gradient(135deg, #1e40af, #2563eb);
             color: white;
@@ -107,7 +133,7 @@
             color: #334155;
         }
 
-        /* BOTOES DE MODO */
+        /* BOTÕES DE MODO */
         .mode-selector {
             display: flex;
             gap: 10px;
@@ -199,23 +225,37 @@
 
 <div class="quiz-container">
 
-    <!-- TELA 1: CAPA DE CADASTRO -->
-    <div id="welcome-screen" class="screen-padding" style="text-align: center;">
-        <h2 style="margin-bottom: 10px; color: #0f172a;">Simulado de Informática: Hardware</h2>
-        <p style="color: #64748b; margin-bottom: 20px; font-size: 14px;">Identifique-se para iniciar a resolução e salvar seu desempenho no ranking geral.</p>
+    <!-- TELA 0: CAPA PRINCIPAL DO SITE (INICIAL) -->
+    <div id="home-cover-screen" class="screen-padding site-cover">
+        <div class="cover-icon">💻</div>
+        <h1 class="cover-title">Quiz de Hardware</h1>
+        <p class="cover-subtitle">
+            Prepare-se para concursos públicos com resumos teóricos completíssimos, macetes práticos e simulados interativos.
+        </p>
+        <button class="nav-btn primary" style="width: 100%; padding: 16px; font-size: 18px;" onclick="goToRegistration()">
+            Iniciar Quiz
+        </button>
+    </div>
+
+    <!-- TELA 1: CADASTRO DO CANDIDATO -->
+    <div id="welcome-screen" class="screen-padding" style="display: none; text-align: center;">
+        <h2 style="margin-bottom: 10px; color: #0f172a;">Identificação do Candidato</h2>
+        <p style="color: #64748b; margin-bottom: 20px; font-size: 14px;">Digite seu nome para acompanhar seu progresso e registrar sua pontuação no ranking geral.</p>
         
         <div class="input-group">
-            <label for="username">Nome Completo do Candidato:</label>
-            <input type="text" id="username" placeholder="Digite seu nome...">
+            <label for="username">Nome Completo:</label>
+            <input type="text" id="username" placeholder="Digite seu nome aqui...">
         </div>
 
-        <button class="nav-btn primary" style="width: 100%; padding: 14px; font-size: 16px;" onclick="startQuiz()">Entrar no Simulado</button>
+        <button class="nav-btn primary" style="width: 100%; padding: 14px; font-size: 16px;" onclick="startQuiz()">
+            Acessar Simulado
+        </button>
     </div>
 
     <!-- TELA 2: ÁREA DE QUESTÕES -->
     <div id="quiz-screen" class="screen-padding" style="display: none;">
         
-        <!-- CAPA DE APRESENTAÇÃO DO QUIZ -->
+        <!-- CAPA INTERNA DO QUIZ -->
         <div class="quiz-header-banner">
             <h1>💻 Simulado de Informática — Hardware</h1>
             <p>Resolva questões focadas em concursos públicos e teste seus conhecimentos</p>
@@ -396,6 +436,11 @@
     let timerInterval = null;
     let totalSeconds = 0;
 
+    function goToRegistration() {
+        document.getElementById("home-cover-screen").style.display = "none";
+        document.getElementById("welcome-screen").style.display = "block";
+    }
+
     function startQuiz() {
         const inputName = document.getElementById("username").value.trim();
         if(!inputName) { alert("Informe seu nome!"); return; }
@@ -544,7 +589,7 @@
         currentQuestion = 0;
         selectedAnswers.fill(null);
         document.getElementById("results-screen").style.display = "none";
-        document.getElementById("welcome-screen").style.display = "block";
+        document.getElementById("home-cover-screen").style.display = "block";
     }
 </script>
 </body>
