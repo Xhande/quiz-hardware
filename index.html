@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guia Resumido de Hardware + Quiz</title>
+  <title>Quiz + Guia Resumido de Hardware</title>
   <style>
     :root {
       --primary: #2563eb;
@@ -51,10 +51,10 @@
       color: var(--primary);
       border-bottom: 2px solid #e2e8f0;
       padding-bottom: 8px;
-      margin-top: 0;
+      margin-top: 20px;
     }
 
-    ul {
+    ul, ol {
       padding-left: 20px;
     }
 
@@ -99,6 +99,14 @@
     .observacao .box-title { color: var(--accent-obs); }
 
     /* Estilo do Quiz */
+    .quiz-title {
+      color: #0f172a;
+      font-size: 1.5rem;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+
     .quiz-question {
       margin-bottom: 20px;
       padding-bottom: 16px;
@@ -146,17 +154,20 @@
       font-size: 1.2rem;
       text-align: center;
       color: var(--primary);
+      margin-top: 16px;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>🚀 Guia Resumido de Hardware</h1>
+  <h1>🚀 Quiz de Hardware</h1>
 
-  <!-- 1. UNIDADES DE MEDIDA -->
   <div class="section">
-    <h2>1. Unidades de Medida & Grandezas</h2>
+    <!-- RESUMO ANEXADO LOGO NO INÍCIO DAS QUESTÕES -->
+    <h2>📖 Resumo Completo de Hardware</h2>
+
+    <h3>1. Unidades de Medida & Grandezas</h3>
     <ul>
       <li><strong>Base do sistema:</strong> A menor unidade de informação é o bit (b)[cite: 1]. 1 Byte (B) equivale exatamente a 8 bits[cite: 1].</li>
       <li><strong>Atenção às siglas:</strong> <em>b</em> minúsculo representa bit; <em>B</em> maiúsculo representa Byte[cite: 1].</li>
@@ -171,11 +182,8 @@
       <div class="box-title">🎯 Macete</div>
       Fator de conversão em provas: a teoria computacional usa a base binária (2<sup>10</sup> = 1024), mas a maioria das bancas aceita o arredondamento decimal (1000) para facilitar as contas[cite: 1].
     </div>
-  </div>
 
-  <!-- 2. ARQUITETURA FUNDAMENTAL -->
-  <div class="section">
-    <h2>2. Arquitetura Fundamental & Conceitos Básicos</h2>
+    <h3>2. Arquitetura Fundamental & Conceitos Básicos</h3>
     <ul>
       <li><strong>Dado vs. Informação:</strong> <strong>Dado</strong> é o elemento bruto sem contexto (ex.: "38"); <strong>Informação</strong> é o dado processado e com sentido (ex.: "Temperatura atual: 38 °C").</li>
       <li><strong>Arquitetura de Von Neumann:</strong> Modelo base dos computadores modernos. Sua característica principal é armazenar <strong>dados e instruções na mesma memória principal</strong>.</li>
@@ -185,21 +193,15 @@
       <div class="box-title">📌 Observação</div>
       O <strong>Gargalo de Von Neumann</strong> ocorre porque o barramento único de transferência cria uma fila de espera entre a CPU e a memória, limitando a velocidade máxima de processamento.
     </div>
-  </div>
 
-  <!-- 3. DISPOSITIVOS DE ENTRADA E SAÍDA -->
-  <div class="section">
-    <h2>3. Dispositivos de Entrada e Saída (E/S ou I/O)</h2>
+    <h3>3. Dispositivos de Entrada e Saída (E/S ou I/O)</h3>
     <ul>
       <li><strong>Entrada (Input):</strong> Enviam dados do mundo externo para o processador (Ex.: teclado, mouse, escâner, microfone, webcam, mesa digitalizadora).</li>
       <li><strong>Saída (Output):</strong> Recebem os dados processados e mostram ao usuário (Ex.: monitor tradicional, impressora, caixas de som, plotter).</li>
       <li><strong>Entrada e Saída (Híbridos):</strong> Realizam ambas as funções (Ex.: monitor <em>touch screen</em>, impressora multifuncional, modem, pendrive, drive de disco).</li>
     </ul>
-  </div>
 
-  <!-- 4. CPU & HIERARQUIA -->
-  <div class="section">
-    <h2>4. Processador (CPU) & Hierarquia de Memória</h2>
+    <h3>4. Processador (CPU) & Hierarquia de Memória</h3>
     <ul>
       <li><strong>Componentes da CPU:</strong>
         <ul>
@@ -216,11 +218,8 @@
       Do <strong>mais rápido / mais caro / menor capacidade</strong> para o <strong>mais lento / mais barato / maior capacidade</strong>:<br>
       <strong>Registradores &rarr; Cache &rarr; RAM &rarr; Memória Secundária (HD/SSD)</strong>
     </div>
-  </div>
 
-  <!-- 5. TIPOS DE MEMÓRIA -->
-  <div class="section">
-    <h2>5. Tipos e Classificação das Memórias</h2>
+    <h3>5. Tipos e Classificação das Memórias</h3>
     <ul>
       <li><strong>RAM:</strong> Memória Principal, de leitura/escrita, <strong>volátil</strong> (perde os dados ao desligar) e de acesso aleatório.</li>
       <li><strong>ROM:</strong> Memória de leitura, <strong>não-volátil</strong> (gravada pelo fabricante). Armazena os programas essenciais do sistema:
@@ -239,11 +238,8 @@
       <div class="box-title">💡 Dica de Prova</div>
       Memórias voláteis <strong>precisam de energia</strong> para manter os dados. Se desligar a tomada: RAM, Cache e Registradores apagam; ROM, HD e SSD mantêm os arquivos!
     </div>
-  </div>
 
-  <!-- 6. MEMÓRIAS AUXILIARES -->
-  <div class="section">
-    <h2>6. Memórias Auxiliares (Armazenamento Secundário)</h2>
+    <h3>6. Memórias Auxiliares (Armazenamento Secundário)</h3>
     <ul>
       <li><strong>Magnéticas:</strong> HD/HDD (grande capacidade, peças mecânicas móveis, sensível a choques).</li>
       <li><strong>FLASH (EEPROM - Sólida):</strong> Sem partes mecânicas, rápida e resistente.
@@ -254,11 +250,8 @@
       </li>
       <li><strong>SSHD:</strong> Dispositivo híbrido (disco magnético + chip de memória FLASH).</li>
     </ul>
-  </div>
 
-  <!-- 7. BARRAMENTOS -->
-  <div class="section">
-    <h2>7. Barramentos e Interfaces de Conexão</h2>
+    <h3>7. Barramentos e Interfaces de Conexão</h3>
     <ul>
       <li><strong>Barramentos Internos:</strong>
         <ul>
@@ -285,11 +278,8 @@
       <div class="box-title">📌 Observação</div>
       O USB 2.0 atinge até 480 Mbps; o USB 3.0 atinge 4,8 Gbps (reconhecido pelo conector azul); e o USB 3.1 tipo C atinge até 10 Gbps.
     </div>
-  </div>
 
-  <!-- 8. INICIALIZAÇÃO -->
-  <div class="section">
-    <h2>8. Sequência de Inicialização (Boot)</h2>
+    <h3>8. Sequência de Inicialização (Boot)</h3>
     <ol>
       <li><strong>Energia:</strong> A fonte liga e estabiliza as tensões.</li>
       <li><strong>BIOS/UEFI:</strong> A CPU executa as instruções do firmware.</li>
@@ -301,11 +291,9 @@
       <div class="box-title">💡 Dica de Prova</div>
       O <strong>UEFI</strong> é o substituto moderno do antigo BIOS. Ele permite inicialização mais rápida, suporte a discos maiores que 2 TB e possui o recurso de segurança <em>Secure Boot</em>.
     </div>
-  </div>
 
-  <!-- SEÇÃO DO QUIZ -->
-  <div class="section">
-    <h2>❓ Quiz de Fixação Rápido</h2>
+    <!-- QUESTÕES DO QUIZ -->
+    <h2 class="quiz-title">❓ Questões de Fixação</h2>
     <div id="quiz-container">
       
       <!-- Questão 1 -->
@@ -365,7 +353,7 @@
 
     if (isCorrect) {
       button.classList.add('correct');
-      feedback.textContent = 'Correcto! 🎉';
+      feedback.textContent = 'Correto! 🎉';
       feedback.style.color = '#15803d';
       correctCount++;
     } else {
@@ -373,7 +361,6 @@
       feedback.textContent = 'Incorreto!';
       feedback.style.color = '#b91c1c';
       
-      // Destaca a resposta correta
       buttons.forEach(btn => {
         if (btn.getAttribute('onclick').includes('true')) {
           btn.classList.add('correct');
