@@ -185,15 +185,15 @@
         }
 
         /* ENUNCIADO E OPÇÕES */
-        .question-text { font-size: 17px; font-weight: 600; color: #0f172a; margin-bottom: 18px; line-height: 1.4; }
+        .question-text { font-size: 16px; font-weight: 600; color: #0f172a; margin-bottom: 18px; line-height: 1.5; white-space: pre-line; }
         .options-container { display: flex; flex-direction: column; gap: 10px; }
-        .option-btn { background-color: #f8fafc; border: 2px solid #cbd5e1; padding: 12px 15px; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; transition: all 0.2s ease; }
+        .option-btn { background-color: #f8fafc; border: 2px solid #cbd5e1; padding: 12px 15px; border-radius: 8px; text-align: left; font-size: 14px; cursor: pointer; transition: all 0.2s ease; line-height: 1.4; }
         .option-btn:hover:not([disabled]) { background-color: #f1f5f9; border-color: #94a3b8; }
         .option-btn.selected { border-color: #2563eb; background-color: #eff6ff; font-weight: 600; }
         .option-btn.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d; font-weight: bold; }
         .option-btn.wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c; }
         
-        .explanation { margin-top: 15px; padding: 12px; border-radius: 8px; background-color: #f1f5f9; font-size: 13px; line-height: 1.4; color: #334155; display: none; }
+        .explanation { margin-top: 15px; padding: 12px; border-radius: 8px; background-color: #f1f5f9; font-size: 13px; line-height: 1.5; color: #334155; display: none; white-space: pre-line; }
 
         /* NAVEGAÇÃO */
         .nav-buttons { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; }
@@ -209,8 +209,7 @@
     <!-- TELA 1: CAPA PRINCIPAL DO SITE -->
     <div id="home-cover-screen" class="screen-padding site-cover">
         <div class="cover-image-container">
-            <!-- Certifique-se de que a imagem na pasta do GitHub se chama 'capa.jpg' (ou altere a extensão abaixo se for .png) -->
-            <img src="Capa.jpg" alt="Capa do Quiz de Hardware" onerror="this.onerror=null; this.src='Capa.png';">
+            <img src="Capa.jpg" alt="Capa do Quiz de Hardware">
         </div>
         <h1 class="cover-title">Quiz de Hardware</h1>
         <p class="cover-subtitle">
@@ -355,7 +354,7 @@
         <div class="progress-bar-bg"><div id="progress-bar" class="progress-bar-fill"></div></div>
         
         <div style="margin-bottom: 10px; overflow: hidden;">
-            <span id="progress-text" style="font-size: 13px; font-weight: bold; color: #64748b;">Questão 1 de 5</span>
+            <span id="progress-text" style="font-size: 13px; font-weight: bold; color: #64748b;">Questão 1 de 30</span>
             <span id="timer-display" class="timer-display"></span>
         </div>
 
@@ -382,16 +381,280 @@
 
 <script>
     const questions = [
-        { question: "Qual componente é responsável por processar dados e executar as instruções do sistema?", options: ["GPU", "Memória RAM", "Processador (CPU)", "HD"], answer: 2, explanation: "A CPU é a Unidade Central de Processamento, responsável pela execução de instruções." },
-        { question: "A memória RAM é classificada como:", options: ["Volátil e Primária", "Não-volátil e Secundária", "Apenas Leitura (ROM)", "Armazenamento Externo"], answer: 0, explanation: "A RAM é volátil (perde dados ao desligar) e de acesso rápido (primária)." },
-        { question: "Qual dispositivo utiliza barramento PCIe para atingir altíssimas velocidades?", options: ["HD SATA", "SSD NVMe M.2", "CD-ROM", "Fita Dat"], answer: 1, explanation: "Os SSDs NVMe M.2 usam as linhas PCIe para entregar transferências muito superiores ao protocolo SATA." },
-        { question: "Responsável por regular e fornecer a corrente elétrica adequada ao computador:", options: ["Placa-mãe", "Fonte de Alimentação", "Cooler", "Estabilizador"], answer: 1, explanation: "A fonte converte a corrente alternada da rede em corrente contínua para os componentes." },
-        { question: "Qual interface transmite simultaneamente áudio e vídeo em sinal puramente digital?", options: ["VGA", "DVI-A", "HDMI", "P2"], answer: 2, explanation: "O HDMI unifica a transmissão de vídeo e áudio digitais em um único cabo." }
+        {
+            question: "1. Suponha que foram gravados arquivos em 10 CDs, preenchendo-os completamente, e que a capacidade de cada CD é 700 Megabytes. Esses arquivos podem ser copiados, integralmente, para um pendrive com capacidade de armazenamento igual a:",
+            options: ["A) 1 Gigabytes.", "B) 2 Gigabytes.", "C) 4 Gigabytes.", "D) 6 Gigabytes.", "E) 8 Gigabytes."],
+            answer: 4,
+            explanation: "COMENTÁRIOS:\n10 CDs x 700 MB = 7.000 Megabytes no total. Sabendo que 1 Gigabyte possui 1.024 Megabytes, 7.000 / 1.024 ≈ 6,83 Gigabytes.\nA alternativa D (6 GB) é insuficiente. A alternativa E (8 GB) é a CORRETA, pois suporta totalmente os 6,83 GB e ainda deixa espaço livre."
+        },
+        {
+            question: "2. TRE/SP - FCC - Analista Jurídico - Em relação à organização de arquivos e pastas:",
+            options: [
+                "A) Uma pasta pode conter apenas arquivos.",
+                "B) Arquivos e pastas de sistemas podem ser renomeados ou movidos, mas nunca excluídos.",
+                "C) Dois arquivos com o mesmo nome podem coexistir desde que sejam em pastas ou subpastas diferentes.",
+                "D) Arquivos podem ser classificados e exibidos de diversas formas, exceto por data da criação.",
+                "E) Arquivos e pastas de documentos do usuário podem ser renomeados, mas não podem ser movidos."
+            ],
+            answer: 2,
+            explanation: "COMENTÁRIOS:\nA) Incorreto: pastas podem conter subpastas.\nB) Incorreto: arquivos/pastas podem ser excluídos.\nC) CORRETO: arquivos de mesmo nome não podem ficar no mesmo diretório, mas em pastas/subpastas distintas sim.\nD) Incorreto: podem ser ordenados por data de criação.\nE) Incorreto: podem ser movidos normalmente."
+        },
+        {
+            question: "3. (FCC - ISS/Teresina) Os notebooks ultrafinos (ultrabooks) utilizam drives do tipo SSD (Solid-State Drive) ao invés de HDs por serem normalmente mais silenciosos, menores, mais resistentes e de acesso mais rápido. Assim como os pen drives, os dispositivos SSD utilizam:",
+            options: [
+                "A) memória flash para armazenar dados. Esse tipo de memória não perde seu conteúdo quando a alimentação elétrica é cortada.",
+                "B) memória flash para armazenar dados. Esse tipo de memória perde seu conteúdo quando a alimentação elétrica é cortada.",
+                "C) registradores para armazenar informações. Os registradores são tipos de memória de acesso muito rápido, porém muito caros.",
+                "D) memória cache para armazenar dados. Esse tipo de memória é acessada duas vezes mais rápido do que as memórias RAM convencionais.",
+                "E) chips BIOS para armazenar as informações. Esses chips são baratos e compactos, porém o acesso a eles é mais lento."
+            ],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\nA) CORRETO: Os SSDs usam memória Flash, que é do tipo não-volátil (não perde o conteúdo sem energia).\nB) Incorreto: memória flash não é volátil.\nC, D, E) Incorretos: SSDs não são formados por registradores, memória cache ou chips de BIOS."
+        },
+        {
+            question: "4. (FCC CREMESP) O SETUP é um programa de configuração do hardware do computador que pode ser chamado antes da inicialização do Sistema Operacional, pressionando-se normalmente a tecla delete. Nos computadores atuais, o SETUP vem armazenado:",
+            options: ["A) no POST.", "B) no HD.", "C) na memória RAM.", "D) no BIOS.", "E) na memória ROM."],
+            answer: 4,
+            explanation: "COMENTÁRIOS:\nO SETUP do firmware (BIOS) vem gravado diretamente em um chip de memória ROM (Read Only Memory) gravado na placa-mãe. Resposta certa: alternativa E."
+        },
+        {
+            question: "5. (FCC-SEFAZ/PI) Considere a descrição de componente: Intel Core i7-5960X 3.0GHz 20MB LGA 2011 V3 DDR4 2133MHz. O termo DDR4 2133MHz refere-se à configuração:",
+            options: ["A) do HD.", "B) da Memória RAM.", "C) da memória cache.", "D) do Processador.", "E) do monitor de vídeo."],
+            answer: 1,
+            explanation: "COMENTÁRIOS:\nDDR4 especifica o padrão/geração de memória RAM, enquanto 2133 MHz refere-se à sua frequência de operação. Alternativa B) correta."
+        },
+        {
+            question: "6. (FUNDATEC) Um usuário tenta copiar um único arquivo de vídeo de 6 GB para um pen drive formatado em FAT32 e recebe uma mensagem de erro impedindo a cópia, embora o pen drive tenha 32 GB livres. Assinale a causa do erro:",
+            options: [
+                "A) O FAT32 aceita no máximo 1.000 arquivos por pasta, limite já atingido.",
+                "B) O sistema FAT32 limita a capacidade total do volume a 4 GB.",
+                "C) Pen drives e mídias removíveis não suportam arquivos de vídeo HD.",
+                "D) O arquivo de vídeo exige obrigatoriamente NTFS devido à criptografia EFS.",
+                "E) O sistema de arquivos FAT32 limita o tamanho máximo de um único arquivo a 4 GiB (aproximadamente 4,3 GB); arquivos maiores não podem ser armazenados nele."
+            ],
+            answer: 4,
+            explanation: "COMENTÁRIOS:\nA alternativa E é a correta. Devido às suas especificações de 32 bits, o sistema de arquivos FAT32 possui a limitação técnica de não aceitar um arquivo individual com tamanho maior que 4 GB."
+        },
+        {
+            question: "7. (FCC-TRE/MA) Quando um computador é ligado:\nI. A primeira coisa que acontece é o carregamento na memória da rotina de partida (bootstrap loader).\nII. A segunda etapa do processo envolve mover programas mais essenciais do disco rígido para a memória RAM.",
+            options: [
+                "A) O primeiro acontecimento está correto, porém a segunda ação está incorreta.",
+                "B) O segundo acontecimento está correto e depende do primeiro para ocorrer.",
+                "C) O primeiro acontecimento está incorreto, porém a segunda ação está correta.",
+                "D) O primeiro acontecimento está correto e o segundo também, porém podem ocorrer em ordem invertida."
+            ],
+            answer: 1,
+            explanation: "COMENTÁRIOS:\nEmbora a questão pule a fase do POST, o bootstrap loader (carregamento de partida) inicializa antes e é pré-requisito para carregar os componentes do sistema do HD para a RAM. Alternativa B) correta."
+        },
+        {
+            question: "8. (FCC-TRT/15ª) Tipo de memória ROM que permite regravação de dados por método elétrico, sem necessidade de remover o dispositivo de seu lugar para um aparelho de luz ultravioleta. Trata-se de:",
+            options: [
+                "A) EVPROM - Electrically Virtual Programmable Read-Only Memory.",
+                "B) EEPROM - Electrically Erasable Programmable Read-Only Memory.",
+                "C) PEROM - Programmable Erasable Read-Only Memory.",
+                "D) MROM - Magnetoresistive Read-Only Memory.",
+                "E) PCROM - Programmable Computer Read-Only Memory."
+            ],
+            answer: 1,
+            explanation: "COMENTÁRIOS:\nEEPROM (Electrically Erasable Programmable Read-Only Memory) é apagada e reprogramada eletricamente em circuito. A EPROM antiga é que exigia remoção para luz UV. Alternativa B) correta."
+        },
+        {
+            question: "9. (FCC-TRT/15ª) Recurso responsável pela coordenação da memória, transformando instruções lógicas (virtuais) em endereços físicos e anotando a hospedagem dos dados para a CPU. Trata-se de:",
+            options: [
+                "A) Control Unit (Unidade de Controle).",
+                "B) Arithmetic Logic Unit (Unidade Lógica e Aritmética).",
+                "C) Central Processing Unit (Unidade Central de Processamento).",
+                "D) Memory Management Unit (Unidade de Gerenciamento de Memória).",
+                "E) Register (Registrador)."
+            ],
+            answer: 3,
+            explanation: "COMENTÁRIOS:\nA MMU (Memory Management Unit) é o circuito encarregado do mapeamento entre endereços virtuais e físicos e pelo gerenciamento da memória. Alternativa D) correta."
+        },
+        {
+            question: "10. (FUNDATEC) Relacione os tipos de manutenção:\n1. Corretiva  2. Preditiva  3. Preventiva\n\n( ) Substituir pasta térmica e limpar coolers a cada 6 meses.\n( ) Consertar fonte após apresentar defeito e parar de funcionar.\n( ) Monitorar a temperatura e contadores SMART para intervir antes da falha.",
+            options: ["A) 2 - 3 - 1", "B) 2 - 1 - 3", "C) 3 - 1 - 2", "D) 3 - 2 - 1", "E) 1 - 3 - 2"],
+            answer: 2,
+            explanation: "COMENTÁRIOS:\n(3) Preventiva: periódica e planejada para evitar falhas.\n(1) Corretiva: executada após o surgimento da quebra/defeito.\n(2) Preditiva: baseada no monitoramento de parâmetros (SMART) para prever a falha. A ordem correta é C (3 - 1 - 2)."
+        },
+        {
+            question: "11. (IDCAP) Associe as etapas funcionais com os respectivos periféricos:\nColuna 1: A. Entrada  B. Processamento  C. Saída\nColuna 2: ( ) Impressora  ( ) Memória RAM  ( ) Touchpad",
+            options: ["A) B, A, C.", "B) C, B, A.", "C) A, B, C.", "D) A, C, B."],
+            answer: 1,
+            explanation: "COMENTÁRIOS:\nImpressora = Saída (C);\nMemória RAM = Processamento/trabalho ativo (B);\nTouchpad = Entrada de dados (A).\nA ordem de cima para baixo é C, B, A. Resposta B."
+        },
+        {
+            question: "12. (IDCAP) Assinale a melhor descrição da função do HDD:",
+            options: [
+                "A) É a unidade capaz de armazenar todos os programas do PC, incluindo o sistema operacional, e toda a massa de dados que foi salva.",
+                "B) Unidade que fornece energia para o PC e periféricos para operarem.",
+                "C) Pentes de memória que carregam temporariamente programas e dados.",
+                "D) Utilizado para realizar as funções de acomodar os componentes internos do PC."
+            ],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\nA) CORRETA: O HDD é o dispositivo principal para armazenamento permanente não-volátil dos dados.\nB) Refere-se à Fonte de Alimentação.\nC) Refere-se à Memória RAM.\nD) Refere-se ao Gabinete."
+        },
+        {
+            question: "13. (IDCAP) Dentro das classificações de hardware, assinale a alternativa que relaciona APENAS dispositivos de Entrada:",
+            options: [
+                "A) Leitor de código de barras e projetores.",
+                "B) Mouse e monitor.",
+                "C) Fones de ouvido e pen drive.",
+                "D) Scanner e Teclado."
+            ],
+            answer: 3,
+            explanation: "COMENTÁRIOS:\nA) Projetor = saída.\nB) Monitor = saída.\nC) Fones = saída; Pen drive = armazenamento/misto.\nD) CORRETO: Scanner e Teclado são exclusivamente de Entrada."
+        },
+        {
+            question: "14. (IDCAP) Correlacione as colunas:\n1. Monitor | 2. Roteador | 3. Fones de Ouvido | 4. Impressora\n\n( ) Conexão à internet via Wi-Fi.\n( ) Saída de áudio para ouvir sons sem alto-falantes.\n( ) Exibe informações visuais ao usuário.\n( ) Cria cópias físicas em papel.",
+            options: ["A) 2, 3, 1 e 4.", "B) 3, 1, 4 e 2.", "C) 2, 1, 4 e 3.", "D) 1, 2, 3 e 4.", "E) 4, 1, 2 e 3."],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\n(2) Roteador - Conexão Wi-Fi\n(3) Fones - Saída de áudio\n(1) Monitor - Exibição visual\n(4) Impressora - Cópias em papel\nSequência correta: A (2, 3, 1, 4)."
+        },
+        {
+            question: "15. (IGEDUC) Sobre a classificação de periféricos conforme o fluxo de dados em relação à CPU, assinale a alternativa CORRETA:",
+            options: [
+                "A) O scanner é um dispositivo de entrada, pois converte imagens físicas em dados digitais enviados ao computador, ao passo que a impressora é de saída.",
+                "B) O teclado é classificado como dispositivo de saída, porque exibe ao usuário o resultado do processamento.",
+                "C) A caixa de som e o microfone são ambos dispositivos de entrada.",
+                "D) O disco rígido é um dispositivo de saída, sem participar da leitura dos dados.",
+                "E) O monitor de vídeo é um dispositivo de entrada, pois recebe os comandos do usuário."
+            ],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\nA) CORRETO: Scanner insere dados (Entrada) e Impressora exibe no papel (Saída).\nB) Teclado é Entrada.\nC) Caixa de som é Saída.\nD) HD é Entrada/Saída (armazenamento).\nE) Monitor convencional é Saída."
+        },
+        {
+            question: "16. (IDCAP) Associe a segunda coluna de acordo com a primeira:\n1. Monitor | 2. Roteador | 3. Fones de Ouvido | 4. Impressora\n\n( ) Conecta à internet via rede Wi-Fi.\n( ) Saída de áudio pessoal.\n( ) Interface visual de interação.\n( ) Cópias físicas de documentos.",
+            options: ["A) 2, 3, 1 e 4.", "B) 3, 1, 4 e 2.", "C) 2, 1, 4 e 3.", "D) 1, 2, 3 e 4.", "E) 4, 1, 2 e 3."],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\nA ordem referente às definições é Roteador (2), Fones (3), Monitor (1) e Impressora (4). Alternativa A."
+        },
+        {
+            question: "17. (IDCAP) Ao realizar a montagem de um computador, qual componente é responsável por armazenar dados permanentes, como o sistema operacional e arquivos do usuário?",
+            options: ["A) Processador.", "B) Disco rígido.", "C) Placa-mãe.", "D) Memória Cache."],
+            answer: 1,
+            explanation: "COMENTÁRIOS:\nA) Processador executa cálculos.\nB) CORRETO: Disco Rígido (HD ou SSD) guarda dados permanentes mesmo sem energia.\nC) Placa-mãe interliga os componentes.\nD) Cache é temporária e volátil."
+        },
+        {
+            question: "18. (FGV) Analise os itens sobre causas de lentidão no computador (V para Verdadeiro e F para Falso):\n( ) Um disco rígido (HD) com setores defeituosos ou SSD operando em capacidade máxima de leitura/escrita.\n( ) Saturação da memória RAM devido ao excesso de abas e programas abertos.\n( ) Comprimento excessivo do cabo de alimentação da CPU, que atrasa o percurso da eletricidade até os circuitos.",
+            options: ["A) F - V - F", "B) F - V - V", "C) V - F - F", "D) V - V - F", "E) V - F - V"],
+            answer: 3,
+            explanation: "COMENTÁRIOS:\n(V) Setores defeituosos ou discos no limite provocam falhas de leitura e lentidão.\n(V) Memória RAM cheia força o uso de memória virtual, tornando o sistema lento.\n(F) A corrente elétrica viaja quase à velocidade da luz; o comprimento do cabo elétrico não altera a velocidade da CPU.\nGabarito: D (V - V - F)."
+        },
+        {
+            question: "19. (FGV) Sobre a tecnologia RAID, assinale a afirmativa correta:",
+            options: [
+                "A) RAID só pode ser implementado em hardware devido às necessidades de eficiência.",
+                "B) RAID 0 é uma forma de backup, pois replica a informação em dois discos físicos.",
+                "C) RAID 1 aumenta o desempenho de escrita espalhando a informação entre os discos.",
+                "D) RAID 10 necessita de no mínimo 10 discos para operação.",
+                "E) RAID 5 utiliza espalhamento das informações nos discos para aumentar eficiência e códigos de paridade para reconstrução em caso de falhas."
+            ],
+            answer: 4,
+            explanation: "COMENTÁRIOS:\nA) Falso: pode ser via hardware ou software.\nB) Falso: RAID 0 faz divisões sem redundância/backup.\nC) Falso: RAID 1 faz espelhamento.\nD) Falso: exige no mínimo 4 discos.\nE) CORRETO: RAID 5 combina stripping (dados divididos) com paridade distribuída."
+        },
+        {
+            question: "20. (FGV) Relacione os conectores aos periféricos citados:\n(1) USB Tipo-A  (2) USB Tipo-B  (3) HDMI  (4) SATA\n\n( ) Teclado com conector retangular tradicional.\n( ) Impressora multifuncional.\n( ) Monitor digital com entrada de áudio e vídeo.\n( ) Unidade SSD com interface de disco.",
+            options: ["A) 1 - 2 - 3 - 4", "B) 2 - 1 - 3 - 4", "C) 1 - 3 - 2 - 4", "D) 1 - 2 - 4 - 3", "E) 3 - 2 - 1 - 4"],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\n(1) USB Tipo-A = Teclados e mouses comuns.\n(2) USB Tipo-B = Entradas de impressoras/scanners.\n(3) HDMI = Vídeo/áudio do monitor.\n(4) SATA = Barramento interno de SSD/HD.\nOrdem correta: A (1 - 2 - 3 - 4)."
+        },
+        {
+            question: "21. (FGV) Associe as características ao tipo de armazenamento: (1) Disco Rígido (HD) ou (2) Unidade de Estado Sólido (SSD):\n\n( ) Armazena dados em memória flash não volátil.\n( ) Apresenta, em geral, menor tempo de acesso aos dados.\n( ) Utiliza discos magnéticos e componentes mecânicos.\n( ) Apresenta, em geral, menor custo por unidade de armazenamento.",
+            options: ["A) 2 - 2 - 1 - 1", "B) 1 - 2 - 1 - 2", "C) 2 - 1 - 2 - 1", "D) 1 - 1 - 2 - 2", "E) 2 - 1 - 1 - 2"],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\n(2) Memória flash = SSD\n(2) Menor tempo de acesso = SSD\n(1) Discos magnéticos e mecânica = HD\n(1) Menor custo por Gigabyte = HD\nSequência correta: A (2 - 2 - 1 - 1)."
+        },
+        {
+            question: "22. (IDECAN) \"Essa memória é programada por um dispositivo eletrônico. Uma vez programada, essa memória pode ser apagada apenas por exposição a uma forte luz ultravioleta, através de uma janela transparente no topo.\" Trata-se da:",
+            options: ["A) USB", "B) RAM", "C) ROM", "D) EPROM"],
+            answer: 3,
+            explanation: "COMENTÁRIOS:\nEPROM (Erasable Programmable Read-Only Memory) possui uma janela de quartzo que possibilita apagar seus dados armazenados mediante aplicação de luz ultravioleta. Resposta D."
+        },
+        {
+            question: "23. (FGV) A placa-mãe de um computador conecta e interliga todos os componentes. Um componente que já vem de fábrica instalado e fixado na placa-mãe é:",
+            options: ["A) a memória RAM.", "B) a placa de rede.", "C) o chipset.", "D) o processador.", "E) o disco rígido."],
+            answer: 2,
+            explanation: "COMENTÁRIOS:\nO Chipset é o conjunto de circuitos integrados soldadamente integrados à placa-mãe para controlar barramentos e comunicação. RAM, CPU e HD são componentes acopláveis/substituíveis. Resposta C."
+        },
+        {
+            question: "24. (IDCAP) No contexto dos principais componentes de um computador, qual das alternativas abaixo se refere corretamente à Memória Principal?",
+            options: [
+                "A) É um dispositivo que aciona, controla, realiza leitura/gravação de um disco magnético.",
+                "B) Instalado dentro do computador, armazenando informações em maior quantidade do que no disco flexível.",
+                "C) É a informação ou comando assumido automaticamente pelo sistema.",
+                "D) É a parte ativa de armazenamento do computador, utilizada quando este estiver executando um programa ou comando."
+            ],
+            answer: 3,
+            explanation: "COMENTÁRIOS:\nA alternativa D descreve perfeitamente a memória RAM (Memória Principal), que atua como espaço de trabalho ativo e temporário onde o processador mantém os programas em execução."
+        },
+        {
+            question: "25. (CPCON) Um cartão de memória de câmera é inserido no leitor e o sistema informa que está bloqueado em modo \"Apenas Leitura\". Qual inspeção física deve ser realizada primeiramente?",
+            options: [
+                "A) Verificar a posição da trava mecânica lateral plástica (Lock) de proteção contra gravação.",
+                "B) Limpar os contatos com álcool isopropílico.",
+                "C) Analisar o pino central de aterramento óptico.",
+                "D) Dobrar o cartão para alinhar os pinos internos.",
+                "E) Forçar a magnetização dos clusters via gravador externo."
+            ],
+            answer: 0,
+            explanation: "COMENTÁRIOS:\nO cartão SD possui uma trava física mecânica na lateral (LOCK). Se estiver acionada, impede qualquer modificação/gravação de arquivos. A inspeção física inicial é conferir essa trava. Resposta A."
+        },
+        {
+            question: "26. (IDIB) Para eliminar gargalos de E/S em servidores de alta performance, substituiu-se os discos legados por unidades flash conectadas diretamente ao barramento PCI Express via protocolo de alta velocidade e baixa latência denominado:",
+            options: ["A) SATA.", "B) USB.", "C) NVMe.", "D) IDE."],
+            answer: 2,
+            explanation: "COMENTÁRIOS:\nO NVMe (Non-Volatile Memory Express) é o protocolo desenvolvido para memórias flash conectadas diretamente ao barramento PCIe da placa-mãe, eliminando limitações do padrão SATA. Resposta C."
+        },
+        {
+            question: "27. (IDIB) A vantagem técnica associada às unidades SSD em relação aos discos rígidos (HDs) convencionais consiste em:",
+            options: [
+                "A) utilizar tecnologia magnética otimizada sem alterar o tempo de acesso.",
+                "B) empregar mecanismos eletromecânicos que reduzem a latência.",
+                "C) armazenar informações em memória flash, proporcionando tempos de acesso e transferência geralmente superiores aos dos discos rígidos.",
+                "D) manter cabeças móveis de leitura controladas eletronicamente."
+            ],
+            answer: 2,
+            explanation: "COMENTÁRIOS:\nOs SSDs não possuem partes mecânicas giratórias, armazenando os dados em circuitos de memória flash de estado sólido, resultando em menor tempo de acesso e velocidade superior. Resposta C."
+        },
+        {
+            question: "28. (IDECAN) Classifique os itens nas categorias (Entrada, Entrada, Saída, Saída, Armazenamento, Processamento) para os cenários:\n(1) Assinatura/Biometria | (2) Digitalização | (3) Impressão de comprovante | (4) Saída de vídeo no monitor | (5) Armazenar arquivos | (6) Processar cálculos.",
+            options: [
+                "A) Mesa digitalizadora e leitor biométrico; impressora; scanner; placa de vídeo; HD; CPU.",
+                "B) Mesa digitalizadora e leitor biométrico; scanner; impressora; memória RAM; SSD; CPU.",
+                "C) Mesa digitalizadora e leitor biométrico; scanner; impressora; placa de vídeo; SSD; CPU.",
+                "D) Mesa digitalizadora e leitor biométrico; scanner; impressora; placa de rede; SSD; CPU."
+            ],
+            answer: 2,
+            explanation: "COMENTÁRIOS:\n1. Entrada: Mesa digitalizadora/Leitor biométrico\n2. Entrada: Scanner\n3. Saída: Impressora\n4. Saída: Placa de vídeo\n5. Armazenamento: SSD\n6. Processamento: CPU\nCombinação correta: C."
+        },
+        {
+            question: "29. (IDECAN) Indique a associação correta em relação ao armazenamento das configurações do BIOS/UEFI, ao pendrive e aos arquivos de extensão .iso:",
+            options: [
+                "A) Configurações na DRAM; pendrive como memória RAM; .iso como arquivo ZIP.",
+                "B) Configurações na ROM fábrica; pendrive via USB; .iso para instalação de driver.",
+                "C) Configurações na Cache L3; pendrive como baixa latência; .iso como rotinas do processador.",
+                "D) Associação: memória flash (SPI/EEPROM) do sistema como armazenamento das configurações do firmware; pendrive como mídia removível via USB; arquivo .iso como imagem de disco inicializável."
+            ],
+            answer: 3,
+            explanation: "COMENTÁRIOS:\nAs alterações do SETUP ficam salvas na memória Flash/EEPROM da placa-mãe. O pendrive opera como mídia removível e o arquivo .iso é uma imagem completa utilizada para criação de mídias bootáveis. Resposta D."
+        },
+        {
+            question: "30. (IDECAN) Sobre os princípios básicos de informática e hardware, assinale a alternativa correta:",
+            options: [
+                "A) A memória RAM armazena dados de forma permanente mesmo sem energia.",
+                "B) O processador (CPU) tem como função principal armazenar arquivos e programas.",
+                "C) O sistema operacional apenas executa programas, sem gerenciar recursos de hardware.",
+                "D) O barramento de dados é responsável por permitir a comunicação entre o processador, a memória e outros componentes do computador.",
+                "E) O protocolo TCP/IP é exclusivo de redes móveis sem fio."
+            ],
+            answer: 3,
+            explanation: "COMENTÁRIOS:\nA) Incorreto: RAM é volátil.\nB) Incorreto: CPU processa instruções, não armazena arquivos.\nC) Incorreto: gerencia todo o hardware.\nD) CORRETO: Barramento de dados integra a comunicação lógica/física entre CPU, memória e periféricos.\nE) Incorreto: TCP/IP é usado tanto em conexões com fio quanto sem fio."
+        }
     ];
 
     let currentQuestion = 0;
     let selectedAnswers = new Array(questions.length).fill(null);
-    let currentMode = "treino"; // "treino" ou "prova"
+    let currentMode = "treino";
     let timerInterval = null;
     let totalSeconds = 0;
 
@@ -458,7 +721,7 @@
         });
 
         if(currentMode === "treino" && selectedAnswers[currentQuestion] !== null) {
-            exp.innerText = "Gabarito Comentado: " + q.explanation;
+            exp.innerText = q.explanation;
             exp.style.display = "block";
         }
 
