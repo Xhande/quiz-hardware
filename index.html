@@ -184,6 +184,22 @@
             float: right;
         }
 
+        /* ESTILO PARA IMAGENS DAS QUESTÕES */
+        .question-image-container {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .question-image-container img {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
         /* ENUNCIADO E OPÇÕES */
         .question-text { font-size: 16px; font-weight: 600; color: #0f172a; margin-bottom: 18px; line-height: 1.5; white-space: pre-line; }
         .options-container { display: flex; flex-direction: column; gap: 10px; }
@@ -346,7 +362,7 @@
             <button class="mode-btn" id="btn-prova" onclick="setMode('prova')">Modo Simulado</button>
         </div>
 
-        <!-- MENSAGEM COM AVISO SOBRE TEMPO (MODO SIMULADO) -->
+        <!-- BANNER DE AVISO DE TEMPO DO MODO SIMULADO -->
         <div id="timer-info" class="timer-info-banner">
             ⏱️ <strong>Orientação de Concurso:</strong> Segundo especialistas de bancas examinadoras, o tempo médio por questão é de <strong>3 minutos</strong> (incluindo cartão-resposta). O tempo ideal para um excelente desempenho é de até <strong>1min 30s</strong> por questão objetiva de informática.
         </div>
@@ -356,6 +372,11 @@
         <div style="margin-bottom: 10px; overflow: hidden;">
             <span id="progress-text" style="font-size: 13px; font-weight: bold; color: #64748b;">Questão 1 de 30</span>
             <span id="timer-display" class="timer-display"></span>
+        </div>
+
+        <!-- RECEPTÁCULO PARA A IMAGEM DA QUESTÃO (SE HOUVER) -->
+        <div id="question-image-container" class="question-image-container">
+            <img id="question-image" src="" alt="Imagem suplementar da questão">
         </div>
 
         <div class="question-text" id="question-text"></div>
@@ -552,12 +573,12 @@
             answer: 4,
             explanation: "COMENTÁRIOS:\nA) Falso: pode ser via hardware ou software.\nB) Falso: RAID 0 faz divisões sem redundância/backup.\nC) Falso: RAID 1 faz espelhamento.\nD) Falso: exige no mínimo 4 discos.\nE) CORRETO: RAID 5 combina stripping (dados divididos) com paridade distribuída."
         },
-     {
-            question: "20. (FGV) A figura a seguir ilustra quatro conectores amplamente utilizados em computadores e dispositivos eletrônicos.\n\nImagem associada para resolução da questão\n\nDurante a instalação de equipamentos de informática, um técnico recebeu os seguintes dispositivos:\n\n( ) Teclado com conector USB Tipo-A.\n( ) Impressora multifuncional com interface USB Tipo-B.\n( ) Monitor digital com entrada HDMI.\n( ) Unidade SSD com interface SATA.\n\nA associação correta entre cada equipamento e o respectivo conector, na ordem apresentada, é:",
+        {
+            question: "20. FGV - NAV Brasil - Técnico em Infraestrutura e Manutenção - Eletrotécnica - A figura a seguir ilustra quatro conectores amplamente utilizados em computadores e dispositivos eletrônicos.\n\nImagem associada para resolução da questão\n\nDurante a instalação de equipamentos de informática, um técnico recebeu os seguintes dispositivos:\n\n( ) Teclado com conector USB Tipo-A.\n( ) Impressora multifuncional com interface USB Tipo-B.\n( ) Monitor digital com entrada HDMI.\n( ) Unidade SSD com interface SATA.\n\nA associação correta entre cada equipamento e o respectivo conector, na ordem apresentada, é:",
             image: "questao20.jpg",
             options: ["A) 1 - 2 - 3 - 4", "B) 2 - 1 - 3 - 4", "C) 1 - 3 - 2 - 4", "D) 1 - 2 - 4 - 3", "E) 3 - 2 - 1 - 4"],
             answer: 0,
-            explanation: "COMENTÁRIOS:\n(1) USB Tipo-A = Teclado\n(2) USB Tipo-B = Impressora multifuncional\n(3) HDMI = Monitor digital\n(4) SATA = Unidade SSD\n\nA ordem correta de associação é: 1 - 2 - 3 - 4 (Alternativa A)."
+            explanation: "COMENTÁRIOS:\n(1) USB Tipo-A = Teclado com conector USB Tipo-A.\n(2) USB Tipo-B = Impressora multifuncional com interface USB Tipo-B.\n(3) HDMI = Monitor digital com entrada HDMI.\n(4) SATA = Unidade SSD com interface SATA.\n\nA associação correta, na ordem apresentada, é: 1 - 2 - 3 - 4 (Alternativa A)."
         },
         {
             question: "21. (FGV) Associe as características ao tipo de armazenamento: (1) Disco Rígido (HD) ou (2) Unidade de Estado Sólido (SSD):\n\n( ) Armazena dados em memória flash não volátil.\n( ) Apresenta, em geral, menor tempo de acesso aos dados.\n( ) Utiliza discos magnéticos e componentes mecânicos.\n( ) Apresenta, em geral, menor custo por unidade de armazenamento.",
@@ -697,6 +718,17 @@
         document.getElementById("progress-bar").style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
         document.getElementById("question-text").innerText = q.question;
         
+        // EXIBIÇÃO DE IMAGEM CASO A QUESTÃO POSSUA O ATRIBUTO 'image'
+        const imgContainer = document.getElementById("question-image-container");
+        const imgTag = document.getElementById("question-image");
+        if (q.image) {
+            imgTag.src = q.image;
+            imgContainer.style.display = "block";
+        } else {
+            imgContainer.style.display = "none";
+            imgTag.src = "";
+        }
+
         const container = document.getElementById("options-container");
         container.innerHTML = "";
         const exp = document.getElementById("explanation");
