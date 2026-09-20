@@ -14,6 +14,7 @@
             background-attachment: fixed;
             color: #333; 
             display: flex; 
+            flex-direction: column;
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
@@ -64,8 +65,20 @@
         .cover-subtitle {
             font-size: 15px;
             color: #64748b;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.5;
+        }
+
+        .author-tag {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2563eb;
+            background-color: #eff6ff;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #bfdbfe;
         }
 
         /* BANNER RESUMAÇO PEDAGÓGICO */
@@ -216,6 +229,15 @@
         .nav-btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; background-color: #cbd5e1; color: #475569; }
         .nav-btn.primary { background-color: #2563eb; color: white; }
         .nav-btn.primary:hover { background-color: #1d4ed8; }
+
+        /* RODAPÉ DO SITE */
+        footer {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -231,6 +253,12 @@
         <p class="cover-subtitle">
             Testes e simulados práticos focados em concursos públicos. Acompanhe resumos de matérias, dicas e meça seu tempo de resolução.
         </p>
+        
+        <!-- SEU NOME EM DESTAQUE NA CAPA DO QUIZ -->
+        <div class="author-tag">
+            💻 Desenvolvido por: <strong>Alexandre Nunes</strong>
+        </div>
+
         <button class="nav-btn primary" style="width: 100%; padding: 16px; font-size: 18px;" onclick="startQuiz()">
             Iniciar Quiz
         </button>
@@ -399,6 +427,11 @@
     </div>
 
 </div>
+
+<!-- RODAPÉ EXTERNO COM SEUS CRÉDITOS DE AUTOR -->
+<footer>
+    © 2026 Quiz de Hardware. Criado por <strong>Seu Nome Aqui</strong>. Todos os direitos reservados.
+</footer>
 
 <script>
     const questions = [
@@ -574,7 +607,7 @@
             explanation: "COMENTÁRIOS:\nA) Falso: pode ser via hardware ou software.\nB) Falso: RAID 0 faz divisões sem redundância/backup.\nC) Falso: RAID 1 faz espelhamento.\nD) Falso: exige no mínimo 4 discos.\nE) CORRETO: RAID 5 combina stripping (dados divididos) com paridade distribuída."
         },
         {
-            question: "20. FGV - NAV Brasil - Técnico em Infraestrutura e Manutenção - Eletrotécnica - A figura a seguir ilustra quatro conectores amplamente utilizados em computadores e dispositivos eletrônicos.\n\nImagem associada para resolução da questão\n\nDurante a instalação de equipamentos de informática, um técnico recebeu os seguintes dispositivos:\n\n( ) Teclado com conector USB Tipo-A.\n( ) Impressora multifuncional com interface USB Tipo-B.\n( ) Monitor digital com entrada HDMI.\n( ) Unidade SSD com interface SATA.\n\nA associação correta entre cada equipamento e o respectivo conector, na ordem apresentada, é:",
+            question: "20. FGV - 2026 - NAV Brasil - Técnico em Infraestrutura e Manutenção - Eletrotécnica - A figura a seguir ilustra quatro conectores amplamente utilizados em computadores e dispositivos eletrônicos.\n\nImagem associada para resolução da questão\n\nDurante a instalação de equipamentos de informática, um técnico recebeu os seguintes dispositivos:\n\n( ) Teclado com conector USB Tipo-A.\n( ) Impressora multifuncional com interface USB Tipo-B.\n( ) Monitor digital com entrada HDMI.\n( ) Unidade SSD com interface SATA.\n\nA associação correta entre cada equipamento e o respectivo conector, na ordem apresentada, é:",
             image: "questao20.jpg",
             options: ["A) 1 - 2 - 3 - 4", "B) 2 - 1 - 3 - 4", "C) 1 - 3 - 2 - 4", "D) 1 - 2 - 4 - 3", "E) 3 - 2 - 1 - 4"],
             answer: 0,
